@@ -55,11 +55,28 @@
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
      <script>
-        $(document).ready(function() {
+       $(document).ready(function() {
+            var printCounter = 0;
+         
+            // Append a caption to the table before the DataTables initialisation
+            $('#example').append('<caption style="caption-side: bottom">Powered by Appcellon ltd.</caption>');
+         
             $('#example').DataTable( {
                 dom: 'Bfrtip',
                 buttons: [
-                    { extend:'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
+                    'copy',
+                    {
+                        extend: 'excel',
+                        messageTop: '{{$title}}'
+                    },
+                    {
+                        extend: 'pdf',
+                        messageTop: '{{$title}}'
+                    },
+                    {
+                        extend: 'print',
+                        messageTop: null
+                    }
                 ]
             } );
         } );
