@@ -44,82 +44,13 @@
                       </tbody>
                     </table>          
                  </div>
+               </div>
+             </div>
+           </div>
+         </div>
+        @endsection
 
-
-
-                @if(empty($from))
-
-                <?php  $total=0; ?>
-
-
-                <div class="card-body">
-                   <h1></h1>
-                   <table class="table table-hover table-striped" id="expenses_table">
-                        <thead>
-                            <th>Name</th> <th>Description</th> <th>Total amounts</th> <th>Action</th>
-                        </thead>
-
-                        <tbody>
-                            @foreach($accounts as $account)
-                            <?php 
-                             $accounts=App\Expense::all()->where('expense_account_id',$account->id)->sum('amount');
-                             $total=$total+ $accounts;                           
-
-                             ?>
-                              <tr>
-                                  <td>{{$account->name}}</td>
-                                  <td>{{$account->description}}</td>
-                                  <td>{{number_format($accounts)}}</td>
-                                  <td><a class="btn btn-primary" href="{{route('account.show',$account->id)}}">Show expenses</a></td>
-                              </tr>
-                            @endforeach 
-                            <td>Total</td> <td></td> <td>{{number_format($total)}}</td> <td></td>                           
-                        </tbody>                      
-                    </table>
-                  </div>
-              @else
-
-              <?php  $total=0 ?>
-
-                <div class="card-body">
-                   <h1></h1>
-                   <table class="table table-hover table-striped" id="expenses_table">
-                        <thead>
-                            <th>Name</th> <th>Description</th> <th>Total amounts</th> <th>Action</th>
-                        </thead>
-
-                        <tbody>
-                            @foreach($accounts as $account)
-                            <?php 
-                             $accounts=App\Expense::whereBetween('date', [$from,$to])->where('expense_account_id',$account->id)->sum('amount');
-                             $total=$total+ $accounts;
-
-                             $id=$account->id."_".$from."_".$to;                         
-
-                             ?>
-                              <tr>
-                                  <td>{{$account->name}}</td>
-                                  <td>{{$account->description}}</td>
-                                  <td>{{number_format($accounts)}}</td>
-                                  <td><a class="btn btn-primary" href="{{route('reports.show',$id)}}">Show expenses</a></td>
-                              </tr>
-                            @endforeach 
-                            <td>Total</td> <td></td> <td>{{number_format($total)}}</td> <td></td>                           
-                        </tbody>                      
-                    </table>
-                  </div>
-
-              @endif
-
-
-
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
-
-@push('scripts')
+        @push('scripts')
      <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>

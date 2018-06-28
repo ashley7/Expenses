@@ -11,7 +11,9 @@ class ExpenseaccountController extends Controller
  
     public function index()
     {
-        return view("account.list")->with(["accounts"=>ExpenseAccount::all()]);
+        $expense_title="List of all account expenses";
+        $item_title="Account summery";
+        return view("account.list")->with(["accounts"=>ExpenseAccount::all(),"expense_title"=>$expense_title,"item_title"=>$item_title]);
     }
 
     public function create()
@@ -32,7 +34,7 @@ class ExpenseaccountController extends Controller
     {
         $account=ExpenseAccount::find($id);
         $title="All expenses in ".$account->name;
-        return view("expense.list")->with(['expense'=>Expense::all()->where('expense_account_id',$id),'title'=>$title]);
+        return view("expense.list")->with(['expense'=>Expense::all()->where('expense_account_id',$id),'title'=>$title,'account_title'=>'',"accounts"=>ExpenseAccount::all()]);
     }
  
     public function edit($id){}

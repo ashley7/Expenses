@@ -14,28 +14,43 @@
 
                <div class="card-body">                   
                     <a class="btn btn-primary right" href="{{route('account.create')}}">Add account</a>
-                    <h1>List of Expense account</h1>
+                    <h1>{{$expense_title}}</h1>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
+                    <?php $total=0; ?>
                     <table class="table table-hover table-striped" id="example">
                         <thead>
-                            <th>Name</th> <th>Description</th> <th>Action</th>
+                            <th>Name</th> <th>Description</th> <th>Total amounts</th> <th>Action</th>
                         </thead>
 
                         <tbody>
                             @foreach($accounts as $account)
+                            <?php 
+                             $accounts=App\Expense::all()->where('expense_account_id',$account->id)->sum('amount');
+                             $total=$total+ $accounts
+
+                             ?>
                               <tr>
                                   <td>{{$account->name}}</td>
                                   <td>{{$account->description}}</td>
+                                  <td>{{number_format($accounts)}}</td>
                                   <td><a class="btn btn-primary" href="{{route('account.show',$account->id)}}">Show expenses</a></td>
                               </tr>
-                            @endforeach                            
+                            @endforeach 
+                            <td>Total</td> <td></td> <td>{{number_format($total)}}</td> <td></td>                           
                         </tbody>                      
                     </table>               
                 </div>
+
+
+
+            
+
+
+
             </div>
         </div>
     </div>
@@ -43,15 +58,17 @@
 @endsection
 
 @push('scripts')  
-    <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>  -->
-    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+   
+
+    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('js/jszip.min.js') }}"></script>
+    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/buttons.print.min.js') }}"></script>
+
      <script>
         $(document).ready(function() {
             $('#example').DataTable( {

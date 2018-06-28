@@ -36,6 +36,13 @@
                             @endforeach
                         </select>
                         <br>
+
+                        <label>Person name</label>
+                        <input type="text" name="person_name" class="form-control">
+
+                        <label>Phone Number</label>
+                        <input type="text" name="phone_number" step="any" class="form-control">
+                        <br>
                         <button class="btn btn-primary" type="submit">Save</button>
                     </form>                  
                 </div>

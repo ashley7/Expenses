@@ -11,7 +11,7 @@ class ExpenseController extends Controller
  
     public function index()
     {
-        return view("expense.list")->with(['expense'=>Expense::all(),'title'=>'All the expenses']);
+        return view("expense.list")->with(['expense'=>Expense::all(),'title'=>'All the expenses','accounts'=>ExpenseAccount::all(),'account_title'=>'Expense Account summery']);
     }
 
   
@@ -23,6 +23,8 @@ class ExpenseController extends Controller
  
     public function store(Request $request)
     {
+        $this->validate($request,["date"=>"required","voucher_number"=>"required","amount"=>"required|numeric","particular"=>"required","expense_account_id"=>"required"]);
+        
         $save_expense = new Expense($request->all());
         $to_date = date_create(str_replace("/", "-", $request->date));
         $save_expense->date=date_timestamp_get($to_date);

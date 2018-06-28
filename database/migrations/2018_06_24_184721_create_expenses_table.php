@@ -12,7 +12,9 @@ class CreateExpensesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('date');
-            $table->string('voucher_number');            
+            $table->string('voucher_number');          
+            $table->string('phone_number')->nullable(); 
+            $table->string('person_name')->nullable();
             $table->double('amount',10,2);
             $table->text('particular')->nullable();
             $table->integer('expense_account_id')->unsigned();

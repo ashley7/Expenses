@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\ExpenseAccount;
 use App\Expense;
 
 class ReportsController extends Controller
@@ -39,12 +40,15 @@ class ReportsController extends Controller
 
         $title="Expenses From: ".date("d M Y",$from)." To: ".date("d M Y",$to);
 
-        return view("expense.list")->with(['expense'=>Expense::whereBetween('date', [$from,$to])->get(),'title'=>$title]);  
+        return view("expense.list")->with(['expense'=>Expense::whereBetween('date', [$from,$to])->get(),'title'=>$title,'accounts'=>ExpenseAccount::all(),'from'=>$from,'to'=>$to]);  
     }
 
     public function show($id)
     {
-
+        $data=explode("_", $id);
+        $account=ExpenseAccount::find($data[0]);
+        $title="All expenses in ".$account->name." From: ".date("d M Y",$data[1])." To: ".date("d M Y",$data[2]);;
+        return view("expense.selected_list")->with(['expense'=>Expense::whereBetween('date', [$data[1],$data[2]])->where('expense_account_id',$id)->get(),'title'=>$title]);
     }
 
    
