@@ -8,4 +8,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('account','ExpenseaccountController');
 	Route::resource('expense','ExpenseController');
 	Route::resource('reports','ReportsController');
+	Route::post('bank_report','ReportsController@bank_report');
+	Route::get('bankreport','ReportsController@bankreport');
+	Route::resource('bank','BankController');
+	Route::resource('bank_deposite','BankDepositController');
 });
