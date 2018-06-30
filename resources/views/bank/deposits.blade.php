@@ -12,7 +12,7 @@
             </style>     
 
                 <div class="card-body">
-                  <a href="/bankreport" class="btn btn-primary right">Report</a>
+                  <a href="/bankreport" class="btn btn-primary left">Generate Report</a>
                   <a class="btn btn-primary right" href="{{route('bank_deposite.create')}}">Add bank Deposit</a>
                   <h1>{{$title}}</h1>
                     @if (session('status'))
@@ -51,7 +51,10 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="example">
                         <thead>
-                            <th>Bank name</th>  <th>Total</th>
+                            <th>Bank name</th>  <th>Total</th> 
+                            @if(!empty($from))
+                              <th></th>
+                            @endif
                         </thead>               
 
 
@@ -63,6 +66,10 @@
                                   <td>{{number_format(App\BankDeposit::all()->where('bank_id',$bank->id)->sum('amount'))}}</td>
                                 @else
                                   <td>{{number_format(App\BankDeposit::where('bank_id',$bank->id)->whereBetween('date', [$from,$to])->sum('amount'))}}</td>
+
+                                  <?php $id=$bank->id."_".$from."_".$to?>
+
+                                  <td><a href="{{route('bank.edit',$id)}}">Show Details</a></td>
                                 @endif
 
                             </tr>

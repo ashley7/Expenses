@@ -23,7 +23,7 @@
                     <?php $total=0; ?>
                     <table class="table table-hover table-striped" id="example">
                       <thead>
-                        <th>Transaction date</th> <th>Voucher number</th> <th>Particular</th> <th>Expense account</th> <th>Amount</th>
+                        <th>Transaction date</th> <th>Voucher number</th> <th>Particular</th> <th>Expense account</th> <th>Name</th> <th>Phone</th> <th>Amount</th>
                       </thead>
 
                       <tbody>
@@ -33,13 +33,15 @@
                               <td>{{$account->voucher_number}}</td>
                               <td>{{$account->particular}}</td>
                               <td>{{$account->expenseaccount->name}}</td>
+                              <td>{{$account->person_name}}</td>
+                              <td>{{$account->phone_number}}</td>
                               <td>{{number_format($account->amount)}}</td>
 
                               <?php $total=$total+$account->amount; ?>
                           </tr>
                         @endforeach
                         <tr>
-                            <th>Total</th> <th></th> <th></th> <th></th> <th><?php echo number_format($total) ?></th>
+                            <th>Total</th> <th></th> <th></th> <th></th> <th></th> <th></th> <th><?php echo number_format($total) ?></th>
                         </tr>
                       </tbody>
                     </table>          

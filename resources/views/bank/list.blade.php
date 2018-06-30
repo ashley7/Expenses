@@ -26,7 +26,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                            <th>Name</th> 
+                            <th>Name</th> <th></th>
                         </thead>
 
                         <tbody>
@@ -34,6 +34,7 @@
                           @foreach($bank as $banks)
                             <tr>
                               <td>{{$banks->name}}</td>
+                              <td><a class="btn btn-primary" href="{{route('bank.show',$banks->id)}}">Show Deposits</a></td>
                             </tr>
                           @endforeach
                                                 
