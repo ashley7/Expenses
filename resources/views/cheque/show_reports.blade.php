@@ -17,7 +17,7 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{route('reports.store')}}">
+                    <form method="POST" action="{{URL('chequereport')}}">
                           @csrf
 
                           <label>Choose the range</label>

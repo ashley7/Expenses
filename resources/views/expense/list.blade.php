@@ -12,7 +12,10 @@
             </style>     
 
                 <div class="card-body">
-                  <a class="btn btn-primary right" href="{{route('expense.create')}}">Add Expense</a>
+                  <span class="right">
+                    <a class="btn btn-primary" href="{{route('reports.create')}}">Report</a> 
+                    <a class="btn btn-primary " href="{{route('expense.create')}}">Add Expense</a>
+                  </span>
                   <h1>{{$title}}</h1>
                     @if (session('status'))
                         <div class="alert alert-success">

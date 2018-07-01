@@ -21,7 +21,7 @@ class ExpenseController extends Controller
   
     public function create()
     {
-        return view("expense.create")->with(['account'=>ExpenseAccount::all()]);
+        return view("expense.create")->with(['account'=>ExpenseAccount::orderBy('name','ASC')->get()]);
     }
 
  

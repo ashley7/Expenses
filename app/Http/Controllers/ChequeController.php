@@ -14,7 +14,7 @@ class ChequeController extends Controller
      */
     public function index()
     {
-        //
+        return view("cheque.list")->with(["cheques"=>Cheque::all(),'title'=>'List of cheques']);
     }
 
     /**
@@ -37,6 +37,8 @@ class ChequeController extends Controller
     {
         $save_cheque=new Cheque($request->all());
         $save_cheque->user_id=\Auth::user()->id;
+        $to_date = date_create(str_replace("/", "-", $request->date));
+        $save_cheque->date=date_timestamp_get($to_date);
         $save_cheque->save();
         return back()->with(["status"=>"Cheque saved successfully."]);
     }
@@ -85,4 +87,8 @@ class ChequeController extends Controller
     {
         //
     }
+
+
+
+    
 }
