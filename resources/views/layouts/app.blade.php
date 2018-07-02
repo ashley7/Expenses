@@ -62,6 +62,8 @@
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('expense.index')}}">Expenses</a></li>
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('account.index')}}">Accounts</a></li>
 
+                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index')}}">Users</a></li>
+
                           <li>
                               <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

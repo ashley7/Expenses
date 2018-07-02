@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Cheque;
+use App\User;
 
-class ChequeController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class ChequeController extends Controller
      */
     public function index()
     {
-        return view("cheque.list")->with(["cheques"=>Cheque::all(),'title'=>'List of cheque dispatch']);
+        //
+        return view("users.list")->with(["user"=>User::all()]);
     }
 
     /**
@@ -24,7 +25,7 @@ class ChequeController extends Controller
      */
     public function create()
     {
-        return view("cheque.create");
+       return view("users.create");
     }
 
     /**
@@ -35,12 +36,13 @@ class ChequeController extends Controller
      */
     public function store(Request $request)
     {
-        $save_cheque=new Cheque($request->all());
-        $save_cheque->user_id=\Auth::user()->id;
-        $to_date = date_create(str_replace("/", "-", $request->date));
-        $save_cheque->date=date_timestamp_get($to_date);
-        $save_cheque->save();
-        return back()->with(["status"=>"Cheque saved successfully."]);
+        $save_user = new User();
+        $save_user->name=$request->name;
+        $save_user->phone_number=$request->phone_number;
+        $save_user->password=bcrypt(12345);
+        $save_user->save();
+        return back()->with(['status'=>'User created']);
+
     }
 
     /**
@@ -87,8 +89,4 @@ class ChequeController extends Controller
     {
         //
     }
-
-
-
-    
 }

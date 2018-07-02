@@ -7,7 +7,7 @@
             <div class="card">               
 
                 <div class="card-body">
-                    <h1>Add Cheque</h1>
+                    <h1>Add Cheque dispatch</h1>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}

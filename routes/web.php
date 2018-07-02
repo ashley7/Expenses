@@ -13,6 +13,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('bank','BankController');
 	Route::resource('bank_deposite','BankDepositController');
 	Route::resource('cheque','ChequeController');
+	Route::resource('user','UserController');
 	Route::get('cheque_report','ReportsController@cheque_report');
 	Route::post('chequereport','ReportsController@chequereport');
 });
