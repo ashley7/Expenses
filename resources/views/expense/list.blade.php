@@ -33,6 +33,7 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Amount</th>
+                        <th>Actions</th>
                       </thead>
 
                       <tbody>
@@ -46,10 +47,19 @@
                               <td>{{$account->phone_number}}</td>
                               <td>{{number_format($account->amount)}}</td>
                               <?php $total=$total+$account->amount; ?>
+                              <td>
+                                 <form action="/expense/{{ $account->id }}" method="POST">
+                                    {{method_field('DELETE')}}
+
+                                    {{ csrf_field() }}
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                </form>
+                              </td>
                           </tr>
                         @endforeach
                         <tr>
-                            <th>Total</th> <th></th> <th></th> <th></th> <th></th><th></th> <th><?php echo number_format($total) ?></th>
+                            <th>Total</th> <th></th> <th></th> <th></th> <th></th><th></th> <th><?php echo number_format($total) ?></th><th></th>
                         </tr>
                       </tbody>
                     </table>          
@@ -144,7 +154,6 @@
             var printCounter = 0;
          
             // Append a caption to the table before the DataTables initialisation
-            $('#example').append('<caption style="caption-side: bottom">Powered by Appcellon ltd.</caption>');
          
             $('#example,#expenses_table').DataTable( {
                 dom: 'Bfrtip',

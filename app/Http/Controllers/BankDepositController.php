@@ -91,6 +91,12 @@ class BankDepositController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            BankDeposit::destroy($id);
+        } catch (\Exception $e) {
+            
+        }
+
+        return back()->with(["status"=>"Operation successfull"]);
     }
 }

@@ -64,7 +64,6 @@
             var printCounter = 0;
          
             // Append a caption to the table before the DataTables initialisation
-            $('#example').append('<caption style="caption-side: bottom">Powered by Appcellon ltd.</caption>');
          
             $('#example,#expenses_table').DataTable( {
                 dom: 'Bfrtip',

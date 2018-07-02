@@ -85,7 +85,12 @@ class ChequeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Cheque::destroy($id);
+        } catch (\Exception $e) {
+            
+        }
+        return back()->with(["status"=>"Operation successfull"]);
     }
 
 

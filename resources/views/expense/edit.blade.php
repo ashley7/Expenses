@@ -8,20 +8,22 @@
                
 
                 <div class="card-body">
-                    <h1>Add Expense</h1>
+                    <h1>Edit Expense</h1>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    <form method="POST" action="{{route('expense.store')}}">
+                    <form method="POST" action="/expense/{{$expense->id}}">
+                        {{method_field('UPDATE')}}
                         @csrf
                         <label>Transaction date</label>
-                        <input type="date" name="date" class="form-control">
+                        <input type="date" name="date" value="{{$expense->date}}" class="form-control">
 
                         <label>Account</label>
                         <select class="form-control" name="expense_account_id">
+                            <option></option>
                             @foreach($account as $accounts)
                              <option value="{{$accounts->id}}">{{$accounts->name}}</option>
                             @endforeach
@@ -29,19 +31,19 @@
                         <br>
 
                         <label>Particular</label>
-                        <textarea class="form-control" name="particular"></textarea>
-
+                        <input type="text" name="particular" value="{{$expense->particular}}" class="form-control">
+ 
                         <label>Amount</label>
-                        <input type="number" name="amount" step="any" class="form-control">
+                        <input type="number" name="amount" value="{{$expense->amount}}" step="any" class="form-control">
 
                         <label>Voucher number</label>
-                        <input type="text" name="voucher_number" class="form-control">
+                        <input type="text" name="voucher_number" value="{{$expense->voucher_number}}" class="form-control">
 
                         <label>Person name</label>
-                        <input type="text" name="person_name" class="form-control">
+                        <input type="text" name="person_name" value="{{$expense->person_name}}" class="form-control">
 
                         <label>Phone Number</label>
-                        <input type="text" name="phone_number" step="any" class="form-control">
+                        <input type="text" name="phone_number" value="{{$expense->phone_number}}" step="any" class="form-control">
                         <br>
                         <button class="btn btn-primary" type="submit">Save</button>
                     </form>                  

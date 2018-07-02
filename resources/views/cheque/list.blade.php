@@ -32,7 +32,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                            <th>#</th> <th>Date</th> <th>Cheque Number</th> <th>Particular</th> <th>Amount</th> <th>Bank</th> <th>Recorded by</th>
+                            <th>#</th> <th>Date</th> <th>Cheque Number</th> <th>Particular</th> <th>Amount</th> <th>Bank</th> <th>Recorded by</th> <th>Actions</th>
                         </thead>
 
                         <tbody>
@@ -44,8 +44,18 @@
                               <td>{{$cheque->cheque_number}}</td>
                               <td>{{$cheque->particular}}</td>
                               <td>{{number_format($cheque->amount)}}</td>
-                              <th>{{$cheque->bank->name}}</th>
-                              <th>{{$cheque->user->name}}</th>
+                              <td>{{$cheque->bank->name}}</td>
+                              <td>{{$cheque->user->name}}</td>
+                              <td>
+                                  <form action="/cheque/{{ $cheque->id }}" method="POST">
+                                    {{method_field('DELETE')}}
+
+                                    {{ csrf_field() }}
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                </form>
+                              </td>
+
                              </tr>
                           @endforeach
                                                 
@@ -75,7 +85,6 @@
             var printCounter = 0;
          
             // Append a caption to the table before the DataTables initialisation
-            $('#example').append('<caption style="caption-side: bottom">Powered by Appcellon ltd.</caption>');
          
             $('#example,#expenses_table').DataTable( {
                 dom: 'Bfrtip',

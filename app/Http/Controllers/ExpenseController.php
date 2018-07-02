@@ -27,7 +27,7 @@ class ExpenseController extends Controller
  
     public function store(Request $request)
     {
-        $this->validate($request,["date"=>"required","voucher_number"=>"required","amount"=>"required|numeric","particular"=>"required","expense_account_id"=>"required"]);
+        $this->validate($request,["date"=>"required","voucher_number"=>"required","amount"=>"required|numeric","expense_account_id"=>"required"]);
         
         $save_expense = new Expense($request->all());
         $to_date = date_create(str_replace("/", "-", $request->date));
@@ -47,17 +47,23 @@ class ExpenseController extends Controller
   
     public function edit($id)
     {
-      
+      return view("expense.edit")->with(["expense"=>Expense::find($id),"account"=>ExpenseAccount::orderBy('name','ASC')->get()]);
     }
 
   
     public function update(Request $request, $id)
     {
-    
+     
     }
  
     public function destroy($id)
     {
-  
+        try {
+            Expense::destroy($id);
+        } catch (\Exception $e) {
+            
+        }
+
+        return back()->with(["status"=>"Operation successfull"]);
     }
 }

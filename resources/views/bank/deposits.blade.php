@@ -30,7 +30,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                            <th>Date</th>  <th>Deposited by</th> <th>Bank</th> <th>Amount</th> <th>Recorded by</th>
+                            <th>Date</th>  <th>Deposited by</th> <th>Bank</th> <th>Amount</th> <th>Recorded by</th><th>Action</th>
                         </thead>
 
                         <tbody>
@@ -41,11 +41,20 @@
                               <td>{{$deposit->bank->name}}</td>
                               <td>{{number_format($deposit->amount)}}</td>
                                <td>{{$deposit->user->name}}</td>
+                               <td>
+                                 <form action="/bank_deposite/{{ $deposit->id }}" method="POST">
+                                    {{method_field('DELETE')}}
+
+                                    {{ csrf_field() }}
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                </form>
+                               </td>
                             </tr>
                             <?php $total = $total +  $deposit->amount;?>
                           @endforeach
                           <tr>
-                             <th>Total</th>  <th></th> <th></th> <th>{{number_format($total)}}</th> <th></th>
+                             <th>Total</th>  <th></th> <th></th> <th>{{number_format($total)}}</th> <th></th> <th></th>
                           </tr>                                                
                         </tbody>                      
                     </table>
