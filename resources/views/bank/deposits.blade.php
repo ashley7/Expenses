@@ -30,23 +30,25 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                            <th>Date</th>  <th>Deposited by</th> <th>Bank</th> <th>Amount</th> <th>Recorded by</th><th>Action</th>
+                          <th>#</th>  <th>Date</th>  <th>Deposited by</th> <th>Bank</th> <th>Amount</th> <th>Recorded by</th><th>Action</th>
                         </thead>
 
                         <tbody>
                           @foreach($deposits as $deposit)
                             <tr>
+                              <td>{{$deposit->id}}</td>
                               <td>{{date('d-m-Y',$deposit->date)}}</td>
                               <td>{{App\User::find($deposit->deposited_by)->name}}</td>
                               <td>{{$deposit->bank->name}}</td>
                               <td>{{number_format($deposit->amount)}}</td>
                                <td>{{$deposit->user->name}}</td>
                                <td>
+
                                  <form action="/bank_deposite/{{ $deposit->id }}" method="POST">
                                     {{method_field('DELETE')}}
 
                                     {{ csrf_field() }}
-                                    <span class="glyphicon glyphicon-trash"></span>
+                                    <a href="{{route('bank_deposite.edit',$deposit->id)}}" class="btn btn-info">Edit</a>
                                     <input type="submit" class="btn btn-danger" value="Delete"/>
                                 </form>
                                </td>
@@ -54,7 +56,7 @@
                             <?php $total = $total +  $deposit->amount;?>
                           @endforeach
                           <tr>
-                             <th>Total</th>  <th></th> <th></th> <th>{{number_format($total)}}</th> <th></th> <th></th>
+                            <th></th> <th>Total</th>  <th></th> <th></th> <th>{{number_format($total)}}</th> <th></th> <th></th>
                           </tr>                                                
                         </tbody>                      
                     </table>

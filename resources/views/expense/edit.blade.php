@@ -15,9 +15,8 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="/expense/{{$expense->id}}">
-                        {{method_field('UPDATE')}}
-                        @csrf
+                    {{Form::model($expense,['files' => true,'method'=>'PATCH', 'action'=>['ExpenseController@update',$expense->id]])}}
+                    
                         <label>Transaction date</label>
                         <input type="date" name="date" value="{{$expense->date}}" class="form-control">
 
@@ -46,7 +45,7 @@
                         <input type="text" name="phone_number" value="{{$expense->phone_number}}" step="any" class="form-control">
                         <br>
                         <button class="btn btn-primary" type="submit">Save</button>
-                    </form>                  
+                    {{Form::close()}}                 
                 </div>
             </div>
         </div>

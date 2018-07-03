@@ -53,7 +53,39 @@ class ExpenseController extends Controller
   
     public function update(Request $request, $id)
     {
-     
+        $save_expense = Expense::find($id);
+        if (!empty($request->date)) {
+           $to_date = date_create(str_replace("/", "-", $request->date));
+           $save_expense->date=date_timestamp_get($to_date);
+        }
+
+        if (!empty($request->voucher_number)) {
+            $save_expense->voucher_number=$request->voucher_number;
+        }
+        if (!empty($request->phone_number)) {
+           $save_expense->phone_number=$request->phone_number;
+       }
+
+       if (!empty($request->person_name)) {
+           $save_expense->person_name=$request->person_name;
+       }
+
+       if (!empty($request->amount)) {
+          $save_expense->amount = $request->amount;
+       }
+
+       if (!empty($request->particular)) {
+           $save_expense->particular = $request->particular;
+       }
+
+       if (!empty($request->expense_account_id)) {
+           $save_expense->expense_account_id=$request->expense_account_id;
+       }
+        
+        try {
+             $save_expense->save();
+        } catch (\Exception $e) {}
+        return redirect("expense");
     }
  
     public function destroy($id)

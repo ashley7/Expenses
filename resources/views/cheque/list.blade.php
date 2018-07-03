@@ -51,7 +51,7 @@
                                     {{method_field('DELETE')}}
 
                                     {{ csrf_field() }}
-                                    <span class="glyphicon glyphicon-trash"></span>
+                                    <a href="{{route('cheque.edit',$cheque->id)}}" class="btn btn-info">Edit</a>
                                     <input type="submit" class="btn btn-danger" value="Delete"/>
                                 </form>
                               </td>

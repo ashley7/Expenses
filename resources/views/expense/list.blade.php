@@ -48,11 +48,13 @@
                               <td>{{number_format($account->amount)}}</td>
                               <?php $total=$total+$account->amount; ?>
                               <td>
+
                                  <form action="/expense/{{ $account->id }}" method="POST">
                                     {{method_field('DELETE')}}
 
                                     {{ csrf_field() }}
-                                    <span class="glyphicon glyphicon-trash"></span>
+                                    <a href="{{route('expense.edit',$account->id)}}" class="btn btn-info">Edit</a>
+
                                     <input type="submit" class="btn btn-danger" value="Delete"/>
                                 </form>
                               </td>

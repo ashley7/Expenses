@@ -62,7 +62,8 @@ class ChequeController extends Controller
      */
     public function edit($id)
     {
-        //
+      $read_cheque = Cheque::find($id);
+      return view("cheque.edit_cheque")->with(compact('read_cheque'));
     }
 
     /**
@@ -74,7 +75,31 @@ class ChequeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $read_cheque = Cheque::find($id);
+        if (!empty($request->cheque_number)) {
+           $read_cheque->cheque_number=$request->cheque_number;
+        }
+
+        if (!empty($request->amount)) {
+          $read_cheque->amount = $request->amount;
+        }
+        
+        if (!empty($request->particular)) {
+            $read_cheque->particular = $request->particular;
+        }
+
+        if (!empty($request->date)) {
+            $read_cheque->date = $request->date;
+        }
+
+        if (!empty($request->bank_id)) {
+            $read_cheque->bank_id=$request->bank_id;
+        }
+
+        try {
+            $read_cheque->save();
+        } catch (\Exception $e) {}
+        return back();
     }
 
     /**

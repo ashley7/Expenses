@@ -68,7 +68,8 @@ class BankDepositController extends Controller
      */
     public function edit($id)
     {
-        //
+        $read_bankdeposit=BankDeposit::find($id);
+        return view("bank.edit_deposite")->with(['read_bankdeposit'=>$read_bankdeposit]);
     }
 
     /**
@@ -80,7 +81,28 @@ class BankDepositController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $read_bankdeposit=BankDeposit::find($id);
+        if (!empty($request->bank_id)) {
+         $read_bankdeposit->bank_id=$request->bank_id;    
+        }
+
+        if (!empty($request->deposited_by)) {
+           $read_bankdeposit->deposited_by=$request->deposited_by;
+        }
+
+        if (!empty($request->amount)) {
+            $read_bankdeposit->amount = $request->amount;
+        }
+
+              
+        try {
+            $read_bankdeposit->save();
+        } catch (\Exception $e) {
+            
+        }
+
+        return back();
+
     }
 
     /**
