@@ -32,7 +32,7 @@
                         <textarea class="form-control" name="particular"></textarea>
 
                         <label>Amount</label>
-                        <input type="number" name="amount" step="any" class="form-control">
+                        <input type="text"  id="number" name="amount" step="any" class="form-control number">
 
                         <label>Voucher number</label>
                         <input type="text" name="voucher_number" class="form-control">
@@ -51,3 +51,4 @@
     </div>
 </div>
 @endsection
+ 

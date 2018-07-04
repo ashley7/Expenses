@@ -16,9 +16,10 @@
 
                   {{Form::model($read_bankdeposit,['files' => true,'method'=>'PATCH', 'action'=>['BankDepositController@update', $read_bankdeposit->id]])}}        
                         <label>Amount</label>
-                        <input type="number" name="amount" value="{{$read_bankdeposit->amount}}" step="any" class="form-control">
+                        <input type="text" name="amount" value="{{$read_bankdeposit->amount}}" step="any" class="form-control number">
                         <label>Choose Bank</label>
                         <select class="form-control" name="bank_id">
+                            <option></option>
                             @foreach(App\Bank::all() as $banks)
                               <option value="{{$banks->id}}">{{$banks->name}}</option>
                             @endforeach
@@ -26,6 +27,7 @@
 
                         <label>Deposited by</label>
                         <select class="form-control" name="deposited_by">
+                            <option></option>
                             @foreach(App\User::all() as $users)
                               <option value="{{$users->id}}">{{$users->name}}</option>
                             @endforeach

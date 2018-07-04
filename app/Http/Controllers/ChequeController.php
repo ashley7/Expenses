@@ -39,8 +39,15 @@ class ChequeController extends Controller
         $save_cheque->user_id=\Auth::user()->id;
         $to_date = date_create(str_replace("/", "-", $request->date));
         $save_cheque->date=date_timestamp_get($to_date);
-        $save_cheque->save();
-        return back()->with(["status"=>"Cheque saved successfully."]);
+        $save_cheque->amount=(double)str_replace(",", "", $request->amount);
+        try {
+         $save_cheque->save(); 
+         return back()->with(["status"=>"Cheque saved successfully."]);  
+        } catch (\Exception $e) {
+             return back();
+        }
+        
+        
     }
 
     /**
@@ -81,7 +88,7 @@ class ChequeController extends Controller
         }
 
         if (!empty($request->amount)) {
-          $read_cheque->amount = $request->amount;
+          $read_cheque->amount = (double)str_replace(",", "", $request->amount);
         }
         
         if (!empty($request->particular)) {

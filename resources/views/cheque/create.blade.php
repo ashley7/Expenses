@@ -20,7 +20,7 @@
                         <input type="text" name="cheque_number" class="form-control">
                         <br>
                         <label>Amount</label>
-                        <input type="number" step="any" name="amount" class="form-control">
+                        <input type="text" step="any" name="amount" class="form-control number">
                         <br>
                         <label>Particular</label>
                         <input type="text" name="particular" class="form-control">
@@ -30,6 +30,7 @@
                         <br>
                         <label>Choose Bank</label>
                         <select class="form-control" name="bank_id">
+                            <option></option>
                             @foreach(App\Bank::all() as $banks)
                               <option value="{{$banks->id}}">{{$banks->name}}</option>
                             @endforeach

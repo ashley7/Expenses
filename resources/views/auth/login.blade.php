@@ -8,12 +8,13 @@
               
 
                 <div class="card-body">
-                    <h1>{{ __('Login') }}</h1>
+                    <h1><center> {{ __('Login') }} </center></h1>
+                    <br><br>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
+                            <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
                                 <input id="phone_number" type="text" class="form-control{{ $errors->has('phone_number') ? ' is-invalid' : '' }}" name="phone_number" value="{{ old('phone_number') }}" required autofocus>

@@ -26,6 +26,7 @@
                     <?php $total=0; ?>
                     <table class="table table-hover table-striped" id="example">
                       <thead>
+                        <th>#</th>
                         <th>Transaction date</th>
                         <th>Voucher number</th>
                         <th>Particular</th>
@@ -39,6 +40,7 @@
                       <tbody>
                         @foreach($expense as $account)
                           <tr>
+                              <td>{{$account->id}}</td>
                               <td>{{date('d M Y',$account->date)}}</td>
                               <td>{{$account->voucher_number}}</td>
                               <td>{{$account->particular}}</td>
@@ -61,7 +63,7 @@
                           </tr>
                         @endforeach
                         <tr>
-                            <th>Total</th> <th></th> <th></th> <th></th> <th></th><th></th> <th><?php echo number_format($total) ?></th><th></th>
+                            <th>Total</th> <th></th> <th></th> <th></th> <th></th><th></th> <th></th><th><?php echo number_format($total) ?></th><th></th>
                         </tr>
                       </tbody>
                     </table>          

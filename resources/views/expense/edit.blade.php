@@ -33,7 +33,7 @@
                         <input type="text" name="particular" value="{{$expense->particular}}" class="form-control">
  
                         <label>Amount</label>
-                        <input type="number" name="amount" value="{{$expense->amount}}" step="any" class="form-control">
+                        <input type="text" name="amount" value="{{$expense->amount}}" step="any" class="form-control number">
 
                         <label>Voucher number</label>
                         <input type="text" name="voucher_number" value="{{$expense->voucher_number}}" class="form-control">

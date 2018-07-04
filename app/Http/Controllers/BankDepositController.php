@@ -31,12 +31,14 @@ class BankDepositController extends Controller
 
     public function store(Request $request)
     {
+
         $this->validate($request,["bank_id"=>"required","amount"=>"required","date"=>"required","deposited_by"=>"required"]);
 
         $save_bankdeposit = new BankDeposit($request->all());
         $save_bankdeposit->user_id=\Auth::user()->id;
         $to_date = date_create(str_replace("/", "-", $request->date));
         $save_bankdeposit->date=date_timestamp_get($to_date);
+        $save_bankdeposit->amount=(double)str_replace(",", "", $request->amount);
         try {
             $save_bankdeposit->save();
             $status="Operation successful.";
@@ -44,7 +46,6 @@ class BankDepositController extends Controller
         } catch (\Exception $e) {
             $status=$e->getMessage();
              return back()->with(["status"=>$status]);
-
         }
        
     }
@@ -91,7 +92,7 @@ class BankDepositController extends Controller
         }
 
         if (!empty($request->amount)) {
-            $read_bankdeposit->amount = $request->amount;
+            $read_bankdeposit->amount = (double)str_replace(",", "", $request->amount);
         }
 
               

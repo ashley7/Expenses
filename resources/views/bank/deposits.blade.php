@@ -56,7 +56,7 @@
                             <?php $total = $total +  $deposit->amount;?>
                           @endforeach
                           <tr>
-                            <th></th> <th>Total</th>  <th></th> <th></th> <th>{{number_format($total)}}</th> <th></th> <th></th>
+                             <th>Total</th> <th></th> <th></th> <th></th> <th>{{number_format($total)}}</th> <th></th> <th></th>
                           </tr>                                                
                         </tbody>                      
                     </table>
