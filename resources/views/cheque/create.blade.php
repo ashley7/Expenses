@@ -14,33 +14,56 @@
                         </div>
                     @endif
 
-                    <form method="POST" action="{{route('cheque.store')}}">
+                    <!-- <form method="POST" action="{{route('cheque.store')}}"> -->
                         @csrf           
                         <label>Cheque number</label>
-                        <input type="text" name="cheque_number" class="form-control">
+                        <input type="text" id="cheque_number" name="cheque_number" class="form-control">
                         <br>
                         <label>Amount</label>
-                        <input type="text" step="any" name="amount" class="form-control number">
+                        <input type="text" step="any" name="amount" id="amount" class="form-control number">
                         <br>
                         <label>Particular</label>
-                        <input type="text" name="particular" class="form-control">
+                        <input type="text" name="particular" id="particular" class="form-control">
                         <br>
                         <label>Date</label>
-                        <input type="date" name="date" class="form-control">
+                        <input type="date" name="date" id="date" class="form-control">
                         <br>
                         <label>Choose Bank</label>
-                        <select class="form-control" name="bank_id">
+                        <select class="form-control" id="bank_id" name="bank_id">
                             <option></option>
                             @foreach(App\Bank::all() as $banks)
                               <option value="{{$banks->id}}">{{$banks->name}}</option>
                             @endforeach
                         </select>
                         <br>
-                        <button class="btn btn-primary" type="submit">Save</button>
-                    </form>                  
+                        <button class="btn btn-primary" id="saveBtn" type="submit">Save</button>
+                    <!-- </form>                   -->
                 </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script type="text/javascript">
+    $("#saveBtn").click(function() {
+        $.ajax({
+                type: "POST",
+                url: "{{ route('cheque.store') }}",
+            data: {
+                date: $("#date").val(),
+                cheque_number: $("#cheque_number").val(),
+                particular: $('#particular').val(),
+                amount: $('#amount').val(),
+                bank_id: $('#bank_id').val(),                        
+                _token: "{{Session::token()}}"
+            },
+            success: function(result){
+                alert(result)
+                $('#amount').val(" ")
+              }
+        })
+    });
+</script>
+@endpush

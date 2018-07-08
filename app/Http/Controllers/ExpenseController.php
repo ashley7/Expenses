@@ -36,10 +36,11 @@ class ExpenseController extends Controller
         $save_expense->amount=(double)str_replace(",", "", $request->amount);
         try {
              $save_expense->save();
+             echo "Saved";
         } catch (\Exception $e) {
-          
+             echo $e->getMessage();
         }
-        return redirect("expense");
+        // return redirect("expense");
     }
 
  

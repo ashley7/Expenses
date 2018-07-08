@@ -42,11 +42,13 @@ class BankDepositController extends Controller
         try {
             $save_bankdeposit->save();
             $status="Operation successful.";
-             return redirect("bank_deposite")->with(["status"=>$status]);
+
+             // return redirect("bank_deposite")->with(["status"=>$status]);
         } catch (\Exception $e) {
             $status=$e->getMessage();
-             return back()->with(["status"=>$status]);
+             // return back()->with(["status"=>$status]);
         }
+        echo $status;
        
     }
 

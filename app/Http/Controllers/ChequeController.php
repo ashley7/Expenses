@@ -42,9 +42,11 @@ class ChequeController extends Controller
         $save_cheque->amount=(double)str_replace(",", "", $request->amount);
         try {
          $save_cheque->save(); 
-         return back()->with(["status"=>"Cheque saved successfully."]);  
+         echo "Cheque saved successfully";
+         // return back()->with(["status"=>"Cheque saved successfully."]);  
         } catch (\Exception $e) {
-             return back();
+             // return back();
+            echo $e->getMessage();
         }
         
         

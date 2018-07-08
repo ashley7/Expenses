@@ -13,7 +13,7 @@
 
                 <div class="card-body">
                   <span class="right">
-                    <a class="btn btn-primary" href="{{route('reports.create')}}">Report</a> 
+                    <a class="btn btn-primary" href="{{route('reports.create')}}">Generate Report</a> 
                     <a class="btn btn-primary " href="{{route('expense.create')}}">Add Expense</a>
                   </span>
                   <h1>{{$title}}</h1>
@@ -53,10 +53,8 @@
 
                                  <form action="/expense/{{ $account->id }}" method="POST">
                                     {{method_field('DELETE')}}
-
                                     {{ csrf_field() }}
                                     <a href="{{route('expense.edit',$account->id)}}" class="btn btn-info">Edit</a>
-
                                     <input type="submit" class="btn btn-danger" value="Delete"/>
                                 </form>
                               </td>
