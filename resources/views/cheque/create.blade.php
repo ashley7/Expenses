@@ -62,6 +62,7 @@
             success: function(result){
                 alert(result)
                 $('#amount').val(" ")
+                $('#particular').val(" ")
               }
         })
     });

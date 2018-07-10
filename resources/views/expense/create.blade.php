@@ -71,6 +71,7 @@
                 success: function(result){
                     alert(result)
                     $('#number').val(" ")
+                    $('#particular').val(" ")
                   }
         })
     });
