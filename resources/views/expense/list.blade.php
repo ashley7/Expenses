@@ -55,7 +55,7 @@
                                     {{method_field('DELETE')}}
                                     {{ csrf_field() }}
                                     <a href="{{route('expense.edit',$account->id)}}" class="btn btn-info">Edit</a>
-                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                    <!-- <input type="submit" class="btn btn-danger" value="Delete"/> -->
                                 </form>
                               </td>
                           </tr>
