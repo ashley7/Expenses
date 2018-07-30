@@ -17,6 +17,10 @@
                   {{Form::model($read_bankdeposit,['files' => true,'method'=>'PATCH', 'action'=>['BankDepositController@update', $read_bankdeposit->id]])}}        
                         <label>Amount</label>
                         <input type="text" name="amount" value="{{$read_bankdeposit->amount}}" step="any" class="form-control number">
+
+                        <label>Number</label>
+                        <input type="text" name="voucher_number" value="{{$read_bankdeposit->voucher_number}}" class="form-control">
+
                         <label>Choose Bank</label>
                         <select class="form-control" name="bank_id">
                             <option></option>

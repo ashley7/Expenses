@@ -39,6 +39,7 @@ class BankDepositController extends Controller
         $to_date = date_create(str_replace("/", "-", $request->date));
         $save_bankdeposit->date=date_timestamp_get($to_date);
         $save_bankdeposit->amount=(double)str_replace(",", "", $request->amount);
+        $save_bankdeposit->voucher_number = $request->voucher_number;
         try {
             $save_bankdeposit->save();
             $status="Operation successful.";
@@ -84,6 +85,7 @@ class BankDepositController extends Controller
      */
     public function update(Request $request, $id)
     {
+ 
         $read_bankdeposit=BankDeposit::find($id);
         if (!empty($request->bank_id)) {
          $read_bankdeposit->bank_id=$request->bank_id;    
@@ -91,6 +93,10 @@ class BankDepositController extends Controller
 
         if (!empty($request->deposited_by)) {
            $read_bankdeposit->deposited_by=$request->deposited_by;
+        }
+
+        if (!empty($request->voucher_number)) {
+           $read_bankdeposit->voucher_number=$request->voucher_number;
         }
 
         if (!empty($request->amount)) {
@@ -101,7 +107,7 @@ class BankDepositController extends Controller
         try {
             $read_bankdeposit->save();
         } catch (\Exception $e) {
-            
+            echo $e->getMessage();exit();
         }
 
         return back();

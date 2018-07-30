@@ -18,6 +18,10 @@
                         @csrf           
                         <label>Amount</label>
                         <input type="text" name="amount" id="amount" step="any" class="form-control number">
+
+                        <label>Voucher/Reciept Number</label>
+                        <input type="text" id="voucher_number" class="form-control">
+
                         <label>Choose Bank</label>
                         <select class="form-control" id="bank_id" name="bank_id">
                             <option></option>
@@ -55,6 +59,7 @@
                 date: $("#date").val(),
                 deposited_by: $("#deposited_by").val(),
                 amount: $('#amount').val(),
+                voucher_number: $('#voucher_number').val(),
                 bank_id: $('#bank_id').val(),                        
                 _token: "{{Session::token()}}"
             },

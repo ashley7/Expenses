@@ -17,6 +17,7 @@ class CreateBankDepositsTable extends Migration
             $table->integer('deposited_by')->unsigned();
             $table->double('amount',10,2);           
             $table->string('date');
+            $table->string('voucher_number')->nullable();
             $table->foreign('bank_id')->references('id')->on('banks')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('deposited_by')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');

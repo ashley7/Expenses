@@ -30,7 +30,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                          <th>#</th>  <th>Date</th>  <th>Deposited by</th> <th>Bank</th> <th>Amount</th> <th>Recorded by</th><th>Action</th>
+                          <th>#</th>  <th>Date</th>  <th>Deposited by</th> <th>Bank</th><th>Voucher / Reciept Number</th> <th>Amount</th> <th>Recorded by</th><th>Action</th>
                         </thead>
 
                         <tbody>
@@ -40,6 +40,7 @@
                               <td>{{date('d-m-Y',$deposit->date)}}</td>
                               <td>{{App\User::find($deposit->deposited_by)->name}}</td>
                               <td>{{$deposit->bank->name}}</td>
+                              <td>{{$deposit->voucher_number}}</td>
                               <td>{{number_format($deposit->amount)}}</td>
                                <td>{{$deposit->user->name}}</td>
                                <td>
@@ -56,7 +57,7 @@
                             <?php $total = $total +  $deposit->amount;?>
                           @endforeach
                           <tr>
-                             <th>Total</th> <th></th> <th></th> <th></th> <th>{{number_format($total)}}</th> <th></th> <th></th>
+                             <th>Total</th> <th></th> <th></th> <th></th> <th></th> <th>{{number_format($total)}}</th> <th></th> <th></th>
                           </tr>                                                
                         </tbody>                      
                     </table>

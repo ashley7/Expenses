@@ -42,9 +42,17 @@ class ExpenseaccountController extends Controller
         return view("expense.list")->with(['expense'=>Expense::all()->where('expense_account_id',$id),'title'=>$title,'account_title'=>'',"accounts"=>ExpenseAccount::all()]);
     }
  
-    public function edit($id){}
+    public function edit($id){
+        return view("account.edit_account")->with(['expense_account'=>ExpenseAccount::find($id)]);
+    }
   
-    public function update(Request $request, $id){}
+    public function update(Request $request, $id){
+        $expense_account = ExpenseAccount::find($id);
+        $expense_account->name = $request->name;
+        $expense_account->description = $request->description;
+        $expense_account->save();
+        return redirect()->route('account.index')->with(['status'=>'Updated successfully']);
+    }
  
     public function destroy($id){}
 }
