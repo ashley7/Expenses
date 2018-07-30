@@ -78,7 +78,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                            <th>Name</th> <th>Description</th> <th>Total amounts</th> <th>Action</th>
+                          <th>#</th>  <th>Name</th> <th>Description</th> <th>Total amounts</th> <th>Action</th>
                         </thead>
 
                         <tbody>
@@ -89,13 +89,17 @@
 
                              ?>
                               <tr>
+                                  <td>{{$account->id}}</td>
                                   <td>{{$account->name}}</td>
                                   <td>{{$account->description}}</td>
                                   <td>{{number_format($accounts)}}</td>
-                                  <td><a class="btn btn-primary" href="{{route('account.show',$account->id)}}">Show expenses</a></td>
+                                  <td><a class="btn btn-success" href="{{route('account.show',$account->id)}}">Show</a>
+                                  <a class="btn btn-primary" href="{{route('account.edit',$account->id)}}">Edit</a>
+
+                                  </td>
                               </tr>
                             @endforeach 
-                            <td>Total</td> <td></td> <td>{{number_format($total)}}</td> <td></td>                           
+                            <td>Total</td><td></td> <td></td> <td>{{number_format($total)}}</td> <td></td>                           
                         </tbody>                      
                     </table>
                   </div>
@@ -107,7 +111,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                            <th>Name</th> <th>Description</th> <th>Total amounts</th> <th>Action</th>
+                          <th>#</th>  <th>Name</th> <th>Description</th> <th>Total amounts</th> <th>Action</th>
                         </thead>
 
                         <tbody>
@@ -120,13 +124,14 @@
 
                              ?>
                               <tr>
+                                  <td>{{$account->id}}</td>
                                   <td>{{$account->name}}</td>
                                   <td>{{$account->description}}</td>
                                   <td>{{number_format($accounts)}}</td>
                                   <td><a class="btn btn-primary" href="{{route('reports.show',$id)}}">Show expenses</a></td>
                               </tr>
                             @endforeach 
-                            <td>Total</td> <td></td> <td>{{number_format($total)}}</td> <td></td>                           
+                            <td>Total</td> <td></td> <td></td> <td>{{number_format($total)}}</td> <td></td>                           
                         </tbody>                      
                     </table>
                   </div>

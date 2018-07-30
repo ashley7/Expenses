@@ -67,7 +67,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="example">
                         <thead>
-                            <th>Bank name</th>  <th>Total</th> 
+                          <th>#</th>  <th>Bank name</th>  <th>Total</th> 
                             @if(!empty($from))
                               <th></th>
                             @endif
@@ -77,6 +77,7 @@
                         <tbody>
                           @foreach($banks as $bank)
                             <tr>
+                              <td>{{$bank->id}}</td>
                               <td>{{$bank->name}}</td>
                               @if(empty($from))
                                   <td>{{number_format(App\BankDeposit::all()->where('bank_id',$bank->id)->sum('amount'))}}</td>
