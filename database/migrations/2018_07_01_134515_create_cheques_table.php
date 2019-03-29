@@ -13,20 +13,23 @@ class CreateChequesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cheques', function (Blueprint $table) {
-            
-            $table->increments('id');
-            $table->timestamps();
-            $table->string('cheque_number');
-            $table->double('amount',10,2);
-            $table->text('particular')->nullable();
-            $table->string('date');
 
-            $table->integer('bank_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->foreign('bank_id')->references('id')->on('banks')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
-        });
+        if (!Schema::hasTable('cheques')) {
+            Schema::create('cheques', function (Blueprint $table) {
+                
+                $table->increments('id');
+                $table->timestamps();
+                $table->string('cheque_number');
+                $table->double('amount',10,2);
+                $table->text('particular')->nullable();
+                $table->string('date');
+
+                $table->integer('bank_id')->unsigned();
+                $table->integer('user_id')->unsigned();
+                $table->foreign('bank_id')->references('id')->on('banks')->onUpdate('cascade')->onDelete('cascade');
+                $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            });
+        }
     }
 
     /**

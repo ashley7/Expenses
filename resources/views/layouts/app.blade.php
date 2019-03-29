@@ -51,8 +51,8 @@
                           <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('cheque.create')}}">Add cheque</a></li> -->
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank_deposite.index')}}">Bank Deposit</a></li>
                           <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank_deposite.create')}}">Add Bank Deposit</a></li> -->
-                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank.index')}}">Bank</a></li>
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank.create')}}">Add Bank</a></li> -->
+                         
+                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('income.index')}}">Incomes</a></li>
                           
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('expense.index')}}">Expenses</a></li>
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('account.index')}}">Accounts</a></li>

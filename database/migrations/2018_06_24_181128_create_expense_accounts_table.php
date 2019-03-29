@@ -8,12 +8,14 @@ class CreateExpenseAccountsTable extends Migration
 {
     public function up()
     {
-        Schema::create('expense_accounts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
-            $table->string('name')->unique();
-            $table->string('description')->nullable();
-        });
+        if (!Schema::hasTable('expense_accounts')) {
+            Schema::create('expense_accounts', function (Blueprint $table) {
+                $table->increments('id');
+                $table->timestamps();
+                $table->string('name')->unique();
+                $table->string('description')->nullable();
+            });
+        }
     }
   
     public function down()

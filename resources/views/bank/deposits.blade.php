@@ -13,8 +13,10 @@
 
                 <div class="card-body">
                   <span class="right">
+
                     <a href="/bankreport" class="btn btn-primary">Generate Report</a>
                     <a class="btn btn-primary" href="{{route('bank_deposite.create')}}">Add bank Deposit</a>
+                    <a class="btn btn-primary"  href="{{route('bank.index')}}">Bank</a>
                     
                   </span>
                   
