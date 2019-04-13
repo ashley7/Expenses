@@ -8,44 +8,61 @@
                
 
                 <div class="card-body">
-                    <h1>Add Income</h1>
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
+                    <h1>Add Income</h1> 
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
+
+                            <label>Transaction date</label>
+                            <input type="date" name="date" id="date" class="form-control">
+
+                            <label>Account</label>
+                            <select class="form-control" id="expense_account_id" name="expense_account_id">
+                                <option></option>
+                                @foreach($account as $accounts)
+                                 <option value="{{$accounts->id}}">{{$accounts->name}}</option>
+                                @endforeach
+                            </select>
+                            <br>
+
+                            <label>Voucher number</label>
+                            <input type="text" name="voucher_number" id="voucher_number" class="form-control">
+
+                            <label>Particular</label>
+                            <textarea class="form-control" id="particular" name="particular"></textarea>
+
+                            <br>
+                            <button class="btn btn-primary" id="saveBtn" type="submit">Save</button>
+                            
+
                         </div>
-                    @endif
 
-                    <!-- <form method="POST" action="{{route('expense.store')}}"> -->
-                        @csrf
-                        <label>Transaction date</label>
-                        <input type="date" name="date" id="date" class="form-control">
 
-                        <label>Account</label>
-                        <select class="form-control" id="expense_account_id" name="expense_account_id">
-                            <option></option>
-                            @foreach($account as $accounts)
-                             <option value="{{$accounts->id}}">{{$accounts->name}}</option>
-                            @endforeach
-                        </select>
-                        <br>
+                        <div class="col-md-6 col-lg-6">
 
-                        <label>Particular</label>
-                        <textarea class="form-control" id="particular" name="particular"></textarea>
 
-                        <label>Amount</label>
-                        <input type="text"  id="number" name="amount" step="any" class="form-control number">
+                            <label>Amount paid</label>
+                            <input type="text"  id="number" name="amount" step="any" class="form-control number">
 
-                        <label>Voucher number</label>
-                        <input type="text" name="voucher_number" id="voucher_number" class="form-control">
+                            <label>Balance left</label>
+                            <input type="text"  id="balance" step="any" class="form-control number_next">                            
 
-                        <label>Person name</label>
-                        <input type="text" name="person_name" id="person_name" class="form-control">
+                            <label>Person name</label>
+                            <input type="text" name="person_name" id="person_name" class="form-control">
 
-                        <label>Phone Number</label>
-                        <input type="text" name="phone_number" id="phone_number" step="any" class="form-control">
-                        <br>
-                        <button class="btn btn-primary" id="saveBtn" type="submit">Save</button>
-                    <!-- </form>                   -->
+                            <label>Phone Number</label>
+                            <input type="text" name="phone_number" id="phone_number" step="any" class="form-control">
+                            <br>
+                            
+
+
+                        </div>
+                    </div>                 
+
+                        
+
+                        
+                        
                 </div>
             </div>
         </div>
@@ -64,6 +81,7 @@
                 incomeaccount_id: $("#expense_account_id").val(),
                 particular: $('#particular').val(),
                 amount: $('#number').val(),
+                balance: $('#balance').val(),
                 voucher_number: $('#voucher_number').val(),
                 person_name: $('#person_name').val(),
                 phone_number: $('#phone_number').val(),                

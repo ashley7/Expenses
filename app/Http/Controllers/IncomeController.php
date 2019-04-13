@@ -49,6 +49,7 @@ class IncomeController extends Controller
         $to_date = date_create(str_replace("/", "-", $request->date));
         $save_expense->date=date_timestamp_get($to_date);
         $save_expense->amount=(double)str_replace(",", "", $request->amount);
+        $save_expense->balance=(double)str_replace(",", "", $request->balance);
         try {
              $save_expense->save();
              echo "Saved";
@@ -107,6 +108,10 @@ class IncomeController extends Controller
 
        if (!empty($request->amount)) {
           $save_expense->amount = (double)str_replace(",", "", $request->amount);
+       }
+        
+        if (!empty($request->balance)) {
+          $save_expense->balance = (double)str_replace(",", "", $request->balance);
        }
 
        if (!empty($request->particular)) {

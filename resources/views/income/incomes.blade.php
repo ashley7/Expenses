@@ -24,7 +24,11 @@
                         </div>
                     @endif
 
+                    <br><br>
+
                     <?php $total=0; ?>
+                    
+                 <div class="table-responsive">
                     <table class="table table-hover table-striped" id="example">
                       <thead>
                         <th>#</th>
@@ -35,6 +39,7 @@
                         <th>Name</th>
                         <th>Phone</th>
                         <th>Amount</th>
+                        <th>Balance</th>
                         <th>Actions</th>
                       </thead>
 
@@ -49,6 +54,7 @@
                               <td>{{$account->person_name}}</td>
                               <td>{{$account->phone_number}}</td>
                               <td>{{number_format($account->amount)}}</td>
+                              <td>{{number_format($account->balance)}}</td>
                               <?php $total=$total+$account->amount; ?>
                               <td>
 
@@ -62,11 +68,12 @@
                           </tr>
                         @endforeach
                         <tr>
-                            <th>Total</th> <th></th> <th></th> <th></th> <th></th><th></th> <th></th><th><?php echo number_format($total) ?></th><th></th>
+                            <th>Total</th> <th></th> <th></th> <th></th> <th></th><th></th> <th></th><th><?php echo number_format($total) ?></th> <th></th> <th></th>
                         </tr>
                       </tbody>
                     </table>          
                  </div>
+               </div>
 
 
 

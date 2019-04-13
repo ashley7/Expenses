@@ -130,6 +130,12 @@
           if (event.which >= 37 && event.which <= 40) return;
           this.value = this.value.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         });
+
+        var el = document.querySelector('input.number_next');
+        el.addEventListener('keyup', function (event) {
+          if (event.which >= 37 && event.which <= 40) return;
+          this.value = this.value.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        });
      </script>
      @stack('scripts')
 

@@ -16,6 +16,10 @@
                     @endif
 
                     {{Form::model($expense,['files' => true,'method'=>'PATCH', 'action'=>['IncomeController@update',$expense->id]])}}
+
+
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6">
                     
                         <label>Transaction date</label>
                         <input type="date" name="date" value="{{$expense->date}}" class="form-control">
@@ -29,20 +33,29 @@
                         </select>
                         <br>
 
+                        <label>Voucher number</label>
+                        <input type="text" name="voucher_number" value="{{$expense->voucher_number}}" class="form-control">
+
                         <label>Particular</label>
                         <input type="text" name="particular" value="{{$expense->particular}}" class="form-control">
+
+                    </div>
+
+                    <div class="col-md-6 col-lg-6">
  
                         <label>Amount</label>
                         <input type="text" name="amount" value="{{$expense->amount}}" step="any" class="form-control number">
 
-                        <label>Voucher number</label>
-                        <input type="text" name="voucher_number" value="{{$expense->voucher_number}}" class="form-control">
+                        <label>Balance</label>
+                        <input type="text" name="balance" value="{{$expense->balance}}" step="any" class="form-control number">                      
 
                         <label>Person name</label>
                         <input type="text" name="person_name" value="{{$expense->person_name}}" class="form-control">
 
                         <label>Phone Number</label>
                         <input type="text" name="phone_number" value="{{$expense->phone_number}}" step="any" class="form-control">
+                    </div>
+                </div>
                         <br>
                         <button class="btn btn-primary" type="submit">Save</button>
                     {{Form::close()}}                 
