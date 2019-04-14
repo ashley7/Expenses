@@ -8,7 +8,7 @@
                
 
                 <div class="card-body">
-                    <h1>Edit Expense</h1>
+                    <h1>Edit Income</h1>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
