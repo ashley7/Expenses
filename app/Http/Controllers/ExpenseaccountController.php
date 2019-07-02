@@ -18,7 +18,7 @@ class ExpenseaccountController extends Controller
     {
         $expense_title="List of all account expenses";
         $item_title="Account summery";
-        return view("account.list")->with(["accounts"=>ExpenseAccount::all(),"expense_title"=>$expense_title,"item_title"=>$item_title]);
+        return view("account.list")->with(["accounts"=>ExpenseAccount::all(),"expense_title"=>$expense_title,"item_title"=>$item_title,'title'=>'']);
     }
 
     public function create()

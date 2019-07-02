@@ -61,8 +61,8 @@
                                  <form action="{{route('income.destroy',$account->id)}}" method="POST">
                                     {{method_field('DELETE')}}
                                     {{ csrf_field() }}
-                                    <a href="{{route('income.edit',$account->id)}}" class="btn btn-info">Edit</a>
-                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                    <a href="{{route('income.edit',$account->id)}}" class="text-info">Edit</a>
+                                    <input type="submit" class="btn btn-danger btn-link" value="Delete"/>
                                 </form>
                               </td>
                           </tr>
@@ -154,41 +154,4 @@
 </div>
 @endsection
 
-@push('scripts')
-     <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('js/jszip.min.js') }}"></script>
-    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.print.min.js') }}"></script>
-     <script>
-       $(document).ready(function() {
-            var printCounter = 0;
-         
-            // Append a caption to the table before the DataTables initialisation
-         
-            $('#example,#expenses_table').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy',
-                    {
-                        extend: 'excel',
-                        messageTop: '{{$title}}'
-                    },
-                    {
-                        extend: 'pdf',
-                        messageTop: '{{$title}}'
-                    },
-                    {
-                        extend: 'print',
-                        messageTop: null
-                    }
-                ]
-            } );
-        } );
-    </script>
-
-@endpush
+@include("layouts.data_tables")

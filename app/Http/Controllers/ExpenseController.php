@@ -15,7 +15,7 @@ class ExpenseController extends Controller
  
     public function index()
     {
-        return view("expense.list")->with(['expense'=>Expense::all(),'title'=>'All the expenses','accounts'=>ExpenseAccount::all(),'account_title'=>'Expense Account summery']);
+        return view("expense.list")->with(['expense'=>Expense::orderBy('id','ASC')->get(),'title'=>'All the expenses','accounts'=>ExpenseAccount::all(),'account_title'=>'Expense Account summery']);
     }
 
   

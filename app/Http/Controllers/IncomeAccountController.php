@@ -17,7 +17,7 @@ class IncomeAccountController extends Controller
     {
         $expense_title="List of all account Incomes";
         $item_title="Account summery";
-        return view("income.account")->with(["accounts"=>IncomeAccount::all(),"expense_title"=>$expense_title,"item_title"=>$item_title]);
+        return view("income.account")->with(["accounts"=>IncomeAccount::all(),"expense_title"=>$expense_title,"item_title"=>$item_title,'title'=>'']);
     }
 
     /**
