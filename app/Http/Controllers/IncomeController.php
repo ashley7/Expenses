@@ -18,7 +18,7 @@ class IncomeController extends Controller
         $data = [
             'income'=>Income::all(),
             'title'=>'All the Incomes',
-            'accounts'=>IncomeAccount::all(),
+            'accounts'=>IncomeAccount::orderBy('date','asc')->get(),
             'account_title'=>'Income Account summery'
         ];
 

@@ -12,7 +12,7 @@
             $('#example,#expenses_table').DataTable( {
                 dom: 'Bfrtip',
                 bSort: false,
-                pageLength: 100,
+                pageLength: 50,
                 buttons: [
                     'copy',
                     {
