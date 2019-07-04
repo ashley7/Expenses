@@ -11,7 +11,7 @@
        $(document).ready(function() {
             $('#example,#expenses_table').DataTable( {
                 dom: 'Bfrtip',
-                bSort: false,
+                bSort: true,
                 pageLength: 50,
                 buttons: [
                     'copy',
