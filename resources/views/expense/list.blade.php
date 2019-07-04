@@ -45,7 +45,7 @@
                                 <?php 
 
                                   try {
-                                    echo date('d M Y',$account->date);
+                                    echo date('Y-m-d',$account->date);
                                   } catch (\Exception $e) {}
 
                                  ?>

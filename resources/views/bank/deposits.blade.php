@@ -39,7 +39,7 @@
                           @foreach($deposits as $deposit)
                             <tr>
                               <td>{{$deposit->id}}</td>
-                              <td>{{date('d-m-Y',$deposit->date)}}</td>
+                              <td>{{date('Y-m-d',$deposit->date)}}</td>
                               <td>{{App\User::find($deposit->deposited_by)->name}}</td>
                               <td>{{$deposit->bank->name}}</td>
                               <td>{{$deposit->voucher_number}}</td>

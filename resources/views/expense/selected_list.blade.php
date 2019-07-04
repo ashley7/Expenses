@@ -29,7 +29,7 @@
                       <tbody>
                         @foreach($expense as $account)
                           <tr>
-                              <td>{{date('d M Y',$account->date)}}</td>
+                              <td>{{date('Y-m-d',$account->date)}}</td>
                               <td>{{$account->voucher_number}}</td>
                               <td>{{$account->particular}}</td>
                               <td>{{$account->expenseaccount->name}}</td>
