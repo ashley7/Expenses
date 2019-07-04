@@ -16,9 +16,9 @@ class IncomeController extends Controller
     public function index()
     {
         $data = [
-            'income'=>Income::all(),
+            'income'=>Income::orderBy('date','asc')->get(),
             'title'=>'All the Incomes',
-            'accounts'=>IncomeAccount::orderBy('date','asc')->get(),
+            'accounts'=>IncomeAccount::all(),
             'account_title'=>'Income Account summery'
         ];
 
