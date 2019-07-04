@@ -47,7 +47,7 @@
                         @foreach($income as $account)
                           <tr>
                               <td>{{$account->id}}</td>
-                              <td>{{date('m/d/Y',$account->date)}}</td>
+                              <td>{{date('Y-m-d',$account->date)}}</td>
                               <td>{{$account->voucher_number}}</td>
                               <td>{{$account->particular}}</td>
                               <td>{{$account->incomeaccount->name}}</td>
