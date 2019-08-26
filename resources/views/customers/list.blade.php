@@ -34,7 +34,16 @@
                             <td>{{$customer->room_status}}</td>
                             <td>{{$customer->semester}}</td>
                             <td><img src="{{asset('pictures')}}/{{$customer->image_url}}" width="75px" height="80px"></td>
-                            <td><a href="{{route('customer.edit',$customer->id)}}">Edit</a></td>
+                            <td>
+
+                              <form method="POST" action="{{route('customer.destroy',$customer->id)}}">
+                                @csrf
+                                {{method_field("DELETE")}}
+                                <a href="{{route('customer.edit',$customer->id)}}">Edit</a>
+                                <button type="submit">Delete</button>
+                              </form>                              
+
+                            </td>
                           </tr>
                         @endforeach
                       </tbody>
