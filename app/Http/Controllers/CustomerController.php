@@ -171,9 +171,23 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Customer $customer)
+    public function destroy($customer)
     {
-        //
+
+        $readCustomer = Customer::find($customer);
+
+        $destinationPath = public_path('pictures');
+
+        try {
+
+            unlink($destinationPath.'/'.$readCustomer->image_url);
+            
+        } catch (\Exception $e) {}
+
+        Customer::destroy($customer);
+
+        return back();
+        
     }
 
 

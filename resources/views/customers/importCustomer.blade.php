@@ -14,6 +14,9 @@
                         </div>
                     @endif
 
+                    <a href="{{asset('tamplate/akamwese.xlsx')}}">Download tempalte</a>
+                    <br>
+
                     <form method="POST" action="/import_customer" enctype="multipart/form-data">
 
                         @csrf
@@ -21,7 +24,8 @@
                         <input type="file" name="excel_file">
                         <br><br>
                        <button class="btn btn-primary" type="submit">Save</button>
-                    </form>                  
+                    </form> 
+                                     
                 </div>
             </div>
         </div>
