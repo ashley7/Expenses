@@ -8,9 +8,9 @@
                 <div class="card-body">
                    <h1>{{$title}}</h1>     
 
-                   <a href="/import_customer">Import excel sheet</a>   
+                   <a href="/import_customer">Import excel sheet OR </a>   
+                   <a href="{{route('customer.create')}}">Add one at a time</a>   
                    <br>
-
             
                     <table class="table table-hover table-striped" id="example">
                       <thead>
