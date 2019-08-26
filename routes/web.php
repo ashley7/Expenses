@@ -33,6 +33,12 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::resource('income','IncomeController');
 
+	Route::resource('customer','CustomerController');
+
+	Route::post('import_customer','CustomerController@importCustomers');
+
+	Route::get('import_customer','CustomerController@importCustomer');
+
 	Route::post('report','IncomeController@report');
 
 	Route::get('income_report/{income_account_id}','IncomeController@incomereport');

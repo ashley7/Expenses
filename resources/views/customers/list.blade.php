@@ -1,0 +1,54 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">    
+                <div class="card-body">
+                   <h1>{{$title}}</h1>     
+
+                   <a href="/import_customer">Import excel sheet</a>   
+                   <br>
+
+            
+                    <table class="table table-hover table-striped" id="example">
+                      <thead>
+                        <th>Client Number</th>
+                        <th>Name</th>
+                        <th>Phone number</th>
+                        <th>Room Number</th>
+                        <th>Room status</th>
+                        <th>Semester</th>
+                        <th>Photo</th>
+                        <th>Action</th>                      
+                      </thead>
+
+                      <tbody>
+                        @foreach($customers as $customer)
+                          <tr>
+                            <td>{{$customer->id}}</td>
+                            <td>{{$customer->name}}</td>
+                            <td>{{$customer->phone_number}}</td>
+                            <td>{{$customer->room_number}}</td>
+                            <td>{{$customer->room_status}}</td>
+                            <td>{{$customer->semester}}</td>
+                            <td><img src="{{asset('pictures')}}/{{$customer->image_url}}" width="75px" height="80px"></td>
+                            <td><a href="{{route('customer.edit',$customer->id)}}">Edit</a></td>
+                          </tr>
+                        @endforeach
+                      </tbody>
+                    </table>
+
+                    {{$customers->links()}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+                        
+                    
+@endsection
+
+@include("layouts.data_tables")
