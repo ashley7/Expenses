@@ -35,7 +35,7 @@
                             <td>{{$customer->semester}}</td>
 
                             <td>
-                              <img src="{{asset('pictures')}}/{{$customer->image_url}}" height="500px" width="500px">
+                              <img src="{{asset('pictures')}}/{{$customer->image_url}}" height="200px" width="200px">
                             </td>
 
                             <td>
