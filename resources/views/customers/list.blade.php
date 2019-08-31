@@ -33,9 +33,12 @@
                             <td>{{$customer->room_number}}</td>
                             <td>{{$customer->room_status}}</td>
                             <td>{{$customer->semester}}</td>
-                            <td><img src="{{asset('pictures')}}/{{$customer->image_url}}" width="200px" height="250px"></td>
-                            <td>
 
+                            <td>
+                              <img src="{{asset('pictures')}}/{{$customer->image_url}}">
+                            </td>
+
+                            <td>
                               <form method="POST" action="{{route('customer.destroy',$customer->id)}}">
                                 @csrf
                                 {{method_field("DELETE")}}
