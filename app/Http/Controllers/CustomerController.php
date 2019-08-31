@@ -60,6 +60,8 @@ class CustomerController extends Controller
 
         $readCustomer->room_number = $request->room_number;
 
+        $readCustomer->semester = $request->semester;
+
 
          if (!empty($request->file('photo'))) {
 
@@ -100,18 +102,19 @@ class CustomerController extends Controller
      */
     public function edit($customer)
     {
+
         $readCustomer = Customer::find($customer);
-
-
 
         $data = [
 
             'title'=>'List of customers',
+            
             'customers'=>$readCustomer
 
         ];
 
         return view('customers.edit')->with($data);
+
     }
 
     /**
