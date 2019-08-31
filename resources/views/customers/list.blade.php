@@ -14,7 +14,7 @@
             
                     <table class="table table-hover table-striped" id="example">
                       <thead>
-                        <th>Client Number</th>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Phone number</th>
                         <th>Room Number</th>
@@ -33,7 +33,7 @@
                             <td>{{$customer->room_number}}</td>
                             <td>{{$customer->room_status}}</td>
                             <td>{{$customer->semester}}</td>
-                            <td><img src="{{asset('pictures')}}/{{$customer->image_url}}" width="75px" height="80px"></td>
+                            <td><img src="{{asset('pictures')}}/{{$customer->image_url}}" width="200px" height="250px"></td>
                             <td>
 
                               <form method="POST" action="{{route('customer.destroy',$customer->id)}}">
@@ -48,7 +48,6 @@
                         @endforeach
                       </tbody>
                     </table>
-
                     {{$customers->links()}}
                   </div>
                 </div>
