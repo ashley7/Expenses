@@ -14,29 +14,29 @@
             
                     <table class="table table-hover table-striped" id="example">
                       <thead>
-                        <th>#</th>
+                        
+                        <th>Photo</th>
                         <th>Name</th>
                         <th>Phone number</th>
                         <th>Room Number</th>
                         <th>Room status</th>
                         <th>Semester</th>
-                        <th>Photo</th>
+                        
                         <th>Action</th>                      
                       </thead>
 
                       <tbody>
                         @foreach($customers as $customer)
                           <tr>
-                            <td>{{$customer->id}}</td>
+                            <td>
+                              <img src="{{asset('pictures')}}/{{$customer->image_url}}" height="200px" width="200px">
+                            </td>
                             <td>{{$customer->name}}</td>
                             <td>{{$customer->phone_number}}</td>
                             <td>{{$customer->room_number}}</td>
                             <td>{{$customer->room_status}}</td>
                             <td>{{$customer->semester}}</td>
-
-                            <td>
-                              <img src="{{asset('pictures')}}/{{$customer->image_url}}" height="200px" width="200px">
-                            </td>
+ 
 
                             <td>
                               <form method="POST" action="{{route('customer.destroy',$customer->id)}}">
