@@ -12,13 +12,9 @@
  
     <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
  
-  
-
-
    <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.min.css') }}">
    <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.dataTables.min.css') }}"> 
 
-  
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -62,7 +58,9 @@
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index')}}">Users</a></li>
 
                           <li>
-                              <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="{{ url('change_apssword') }}">Change password</a>
+
+                                <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}

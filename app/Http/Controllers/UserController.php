@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -72,7 +74,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $user = Auth::user();
+
+        $data = [
+            'title'=>'Change password',
+            'user'=>$user,
+        ];
+
+        return view('users.change_password')->with($data);
     }
 
     /**
@@ -84,7 +94,27 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $rules = [
+            'name'=>'required',
+            'phone_number'=>'required',
+            'password'=>'required|confirmed'
+        ];
+
+        $this->validate($request,$rules);
+
+        $user = Auth::user();
+
+        $user->name = $request->name;
+
+        $user->phone_number = $request->phone_number;
+
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+
+        return redirect()->back();
+
     }
 
     /**
