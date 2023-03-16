@@ -58,7 +58,7 @@
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index')}}">Users</a></li>
 
                           <li>
-                                <a class="dropdown-item" href="{{ url('change_apssword') }}">Change password</a>
+                                <a class="dropdown-item" href="{{ route('users.edit','Edit profile') }}">Change password</a>
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();

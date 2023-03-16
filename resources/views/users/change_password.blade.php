@@ -23,14 +23,14 @@
                         <label>Phone Number</label>
                         <input type="text" name="phone_number" value="{{$user->phone_number}}" class="form-control">
 
-                        <label>Phone Number</label>
+                        <label>Password</label>
                         <input type="password" name="password" value="{{$user->password}}" class="form-control">
 
-                        <label>Phone Number</label>
+                        <label>Confirm password</label>
                         <input type="password" name="password_confirmation" class="form-control">
                         <br>
                         <button class="btn btn-primary" type="submit">Save changes</button>
-                        
+
                     </form>                  
                 </div>
             </div>
