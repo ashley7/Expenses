@@ -103,4 +103,35 @@ class ExpenseController extends Controller
 
         return back()->with(["status"=>"Operation successfull"]);
     }
+
+    
+    public function searchRecord(Request $request)
+    {
+
+        $search_text = $request->search_text;
+
+        if(empty($search_text)) return back();
+
+        $expenses = Expense::where('voucher_number','LIKE','%'.$search_text.'%')
+                            ->orWhere('phone_number','LIKE','%'.$search_text.'%') 
+                            ->orWhere('person_name','LIKE','%'.$search_text.'%') 
+                            ->orWhere('particular','LIKE','%'.$search_text.'%') 
+                            ->orWhere('id','LIKE','%'.$search_text.'%') 
+                            ->paginate(100);
+
+        $accounts = ExpenseAccount::where('name','LIKE','%'.$search_text.'%')->paginate(100);
+
+        $total = $expenses->sum('amount');
+
+        $data = [
+            'expense'=>$expenses,
+            'title'=>'Search results for '.$search_text,
+            'accounts'=>$accounts,
+            'account_title'=>'Expense Account summery',
+            'total_expenses' => $total,
+          ];
+
+        return view("expense.all_list")->with($data);
+
+    }
 }

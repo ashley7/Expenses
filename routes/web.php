@@ -1,4 +1,8 @@
 <?php
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -44,5 +48,15 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('income_report/{income_account_id}','IncomeController@incomereport');
 
 	Route::get('income_report','IncomeController@income_report');
+
+	Route::get('change_password','UserController@changePassword');
+
+	Route::get('search_record','ExpenseController@index');
+
+	Route::post('search_record','ExpenseController@searchRecord');
+
+	Route::post('search_income_record','IncomeController@search_income_record');
+
+	Route::get('search_income_record','IncomeController@index');
 
 });

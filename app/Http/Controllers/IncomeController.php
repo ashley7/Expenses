@@ -181,4 +181,36 @@ class IncomeController extends Controller
 
         return view("income.incomes")->with(['income'=>Income::whereBetween('date', [$from,$to])->get(),'title'=>$title,'accounts'=>IncomeAccount::all(),'from'=>$from,'to'=>$to]);
     }
+
+
+    public function search_income_record(Request $request)
+    {
+
+        $search_text = $request->search_text;
+
+        if(empty($search_text)) return back();
+
+        $incomes = Income::where('voucher_number','LIKE','%'.$search_text.'%')
+        ->orWhere('phone_number','LIKE','%'.$search_text.'%') 
+        ->orWhere('person_name','LIKE','%'.$search_text.'%') 
+        ->orWhere('particular','LIKE','%'.$search_text.'%') 
+        ->orWhere('id','LIKE','%'.$search_text.'%') 
+        ->orderBy('date','asc')->paginate(100);
+
+        $income_account = IncomeAccount::get();
+
+        $total = $incomes->sum('amount');
+
+        $data = [
+            'income'=>$incomes,
+            'title'=>'All the Incomes',
+            'accounts'=> $income_account,
+            'account_title'=>'Income Account summery',
+            'total' => $total
+        ];
+
+        return view("income.incomes")->with($data);
+        
+    }
+    
 }

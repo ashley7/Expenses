@@ -2,28 +2,30 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <h1>{{$title}}</h1>
+    <span class="right">
+      <a class="btn btn-primary" href="{{route('reports.create')}}">Generate Report</a> 
+      <a class="btn btn-primary " href="{{route('expense.create')}}">Add Expense</a>
+    </span>
+    <hr>
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+    <hr>
+    <form method="POST" action="/search_record" class="col-md-4">
+      @csrf 
+      <input type="text" style="width: 80%;" placeholder="Search manually" name="search_text">
+      <button style="float: right;" class="badge badge-success p-2" type="submit">Search</button>
+    </form>
+    <hr>
+
+    <div class="row">
         <div class="col-md-12">
-            <div class="card">    
-            <style type="text/css">
-              .right{
-                float: right;
-              }
-            </style>     
-
-                <div class="card-body">
-                  <span class="right">
-                    <a class="btn btn-primary" href="{{route('reports.create')}}">Generate Report</a> 
-                    <a class="btn btn-primary " href="{{route('expense.create')}}">Add Expense</a>
-                  </span>
-                  <h1>{{$title}}</h1>
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <?php $total=0; ?>
+            <div class="card"> 
+              <div class="card-body">
+                <?php $total=0; ?>
                     <table class="table table-hover table-striped" id="example">
                       <thead>
                         <th>#</th>
