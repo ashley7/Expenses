@@ -17,7 +17,7 @@ class IncomeAccountController extends Controller
     {
         $expense_title="List of all account Incomes";
         $item_title="Account summery";
-        return view("income.account")->with(["accounts"=>IncomeAccount::all(),"expense_title"=>$expense_title,"item_title"=>$item_title,'title'=>'']);
+        return view("income.account")->with(["accounts"=>IncomeAccount::get(),"expense_title"=>$expense_title,"item_title"=>$item_title,'title'=>'']);
     }
 
     /**
@@ -55,7 +55,7 @@ class IncomeAccountController extends Controller
     {
         $account=IncomeAccount::find($id);
         $title="All Incomes in ".$account->name;
-        return view("income.incomes")->with(['income'=>Income::all()->where('incomeaccount_id',$id),'title'=>$title,'account_title'=>'',"accounts"=>IncomeAccount::all()]);
+        return view("income.incomes")->with(['income'=>Income::where('incomeaccount_id',$id)->paginate(100),'title'=>$title,'account_title'=>'',"accounts"=>IncomeAccount::get()]);
     }
 
     /**
