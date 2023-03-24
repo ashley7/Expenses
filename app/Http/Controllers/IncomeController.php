@@ -16,9 +16,9 @@ class IncomeController extends Controller
     public function index()
     {
         $data = [
-            'income'=>Income::orderBy('date','asc')->get(),
+            'income'=>Income::orderBy('created_at','asc')->paginate(100),
             'title'=>'All the Incomes',
-            'accounts'=>IncomeAccount::all(),
+            'accounts'=>IncomeAccount::get(),
             'account_title'=>'Income Account summery'
         ];
 
@@ -212,5 +212,5 @@ class IncomeController extends Controller
         return view("income.incomes")->with($data);
         
     }
-    
+
 }
