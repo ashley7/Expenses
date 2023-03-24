@@ -74,7 +74,20 @@
                             <th>Total</th> <th></th> <th></th> <th></th> <th></th><th></th> <th></th><th><?php echo number_format($total) ?></th><th></th>
                         </tr>
                       </tbody>
-                    </table>          
+                    </table>   
+                    
+                    <?php 
+                    try {
+                      ?>
+                      {{$expense->links()}}
+
+                      <?php
+                    } catch (\Throwable $th) {
+                      //throw $th;
+                    }
+                    
+                    
+                    ?>
                  </div>
 
 

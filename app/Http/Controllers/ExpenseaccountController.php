@@ -39,7 +39,7 @@ class ExpenseaccountController extends Controller
     {
         $account=ExpenseAccount::find($id);
         $title="All expenses in ".$account->name;
-        return view("expense.list")->with(['expense'=>Expense::all()->where('expense_account_id',$id),'title'=>$title,'account_title'=>'',"accounts"=>ExpenseAccount::all()]);
+        return view("expense.list")->with(['expense'=>Expense::where('expense_account_id',$id)->paginate(),'title'=>$title,'account_title'=>'',"accounts"=>ExpenseAccount::all()]);
     }
  
     public function edit($id){
