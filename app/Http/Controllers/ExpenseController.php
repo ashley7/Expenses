@@ -131,7 +131,7 @@ class ExpenseController extends Controller
             'total_expenses' => $total,
           ];
 
-        return view("expense.all_list")->with($data);
+        return view("expense.list")->with($data);
 
     }
 }
