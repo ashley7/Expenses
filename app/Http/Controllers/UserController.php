@@ -127,4 +127,20 @@ class UserController extends Controller
     {
         //
     }
+
+    public function activateLicence(Request $activate)
+    {
+
+        $rules = ['licence_key'=>'required'];
+
+        $this->validate($activate,$rules);
+
+        $path = User::getFile();
+
+        $fp = fopen($path, "w");
+
+        fwrite($fp, $activate->licence_key);
+        
+        return redirect('/');         
+    }
 }

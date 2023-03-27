@@ -7,7 +7,13 @@ Route::get('/', function () {
     return view('auth.login');
 });
 Auth::routes();
-Route::group(['middleware' => 'auth'], function () {
+
+Route::post('activate_licence','UserController@activateLicence');  
+
+Route::get('activate_licence','HomeController@index');
+
+
+Route::group(['middleware' => ['auth','license']], function () {
 
 	Route::get('/home', 'HomeController@index')->name('home');
 

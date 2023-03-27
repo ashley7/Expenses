@@ -65,7 +65,15 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Kampala',
+
+    'li_dir_win' => 'C://ProgramData/mpabaisi/',
+
+    'li_dir_unix' => '/var/www/html/ProgramData/mpabaisi/',
+
+    'li_file' => env('DB_DATABASE', 'forge').'.txt',
+
+    'li_factor' => 1992,
 
     /*
     |--------------------------------------------------------------------------

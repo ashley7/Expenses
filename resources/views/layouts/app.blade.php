@@ -16,10 +16,16 @@
    <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.dataTables.min.css') }}"> 
 
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        .nav-link{
+            color: #FFF !important;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: #007bff !important;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                    {{ config('app.name', 'Laravel') }}
@@ -82,6 +88,29 @@
         <main class="py-4">
             @yield('content') 
         </main>
+
+        <footer class="footer" style="background-color: #007bff !important;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                        <span class="text-white">Powered by Mpabaisi Technologies</span>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                        <div class="text-md-right footer-links d-sm-block">
+                            <?php 
+                            $checkkey = App\User::apearance();                                    
+                            $status = $checkkey['status'];
+
+                            $key = App\User::key();
+                            ?> 
+                            @if($status=="invalids")
+                                <a href="https://licence.agent.co.ug/licence/{{$key}}"><span class="text-white">License is active until {{ $checkkey['date'] }}</span> </a>                                                                        
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
       <script type="text/javascript">
