@@ -28,12 +28,24 @@ class ExpenseController extends Controller
     public function store(Request $request)
     {
  
-        $this->validate($request,["date"=>"required","voucher_number"=>"required","amount"=>"required","expense_account_id"=>"required"]);
+        $this->validate($request,["date"=>"required","amount"=>"required","expense_account_id"=>"required"]);
         
         $save_expense = new Expense($request->all());
+
         $to_date = date_create(str_replace("/", "-", $request->date));
+
         $save_expense->date=date_timestamp_get($to_date);
+
         $save_expense->amount=(double)str_replace(",", "", $request->amount);
+
+        if (empty($request->voucher_number)) 
+
+            $save_expense->voucher_number=time();
+
+        else
+        
+            $save_expense->voucher_number=$request->voucher_number;
+
         try {
              $save_expense->save();
              echo "Saved";

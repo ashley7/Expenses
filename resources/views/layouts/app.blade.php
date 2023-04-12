@@ -1,133 +1,187 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{ config('app.name') }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Simple finance records system" name="description" />
+        <meta content="Mpabaisi Technologies" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+     
+        <link rel="shortcut icon" href="/images/logo.png">   
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+        <link href="/purple/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="/purple/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.dataTables.min.css') }}"> 
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
- 
-    <script src="{{ asset('js/jquery-3.3.1.js') }}"></script>
- 
-   <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.min.css') }}">
-   <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.dataTables.min.css') }}"> 
+        <style>
+            body{
+                background-color: #FFF !important;
+            }
+        </style>
+        @yield('styles')
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    </head>
 
-    <style>
-        .nav-link{
-            color: #FFF !important;
-        }
-    </style>
-</head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel" style="background-color: #007bff !important;">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                   {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <body>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+        <!-- Begin page -->
+        <div id="wrapper">
 
-                    </ul>
+            <!-- Topbar Start -->
+            <div class="navbar-custom" style="background-color: #1062ea !important;">
+                <ul class="list-unstyled topnav-menu float-right mb-0">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                       
-                        <!-- Authentication Links -->
+                @guest
 
-                        @guest
-                            <!-- <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li> -->
-                            <!-- <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li> -->
-                        @else                        
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('customer.index')}}">Customers</a></li> -->
+                @else
 
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('cheque.index')}}">cheque</a></li> -->
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('cheque.create')}}">Add cheque</a></li> -->
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank_deposite.index')}}">Bank Deposit</a></li> -->
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank_deposite.create')}}">Add Bank Deposit</a></li> -->
-                         
-                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('income.index')}}">Incomes</a></li>
-                          
-                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('expense.index')}}">Expenses</a></li>
-                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('account.index')}}">Accounts</a></li>
+                    <li class="dropdown notification-list">
+                        <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light text-white" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                             {{ Auth::user()->name }}  <i class="mdi mdi-chevron-down"></i> 
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                            <a class="dropdown-item" href="{{ route('user.edit','Edit profile') }}">Change password</a>
 
-                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index')}}">Users</a></li>
+                            <a href="{{ route('logout') }}" class="dropdown-item notify-item" onclick="event.preventDefault();  document.getElementById('logout-form').submit();">
+                                <i class="fe-log-out"></i>
+                                <span>Logout</span>
+                            </a>                           
 
-                          <li>
-                                <a class="dropdown-item" href="{{ route('user.edit','Edit profile') }}">Change password</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
 
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                </a>
+                        </div>
+                    </li>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                          </li>
-                      
+                    @endguest
 
-                           
-                        @endguest
-                    </ul>
+                    <li class="dropdown notification-list">
+                        <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect waves-light">
+                            <i class="fe-settings noti-icon"></i>
+                        </a>
+                    </li>
+
+                </ul>
+
+                <!-- LOGO -->
+                <div class="logo-box">
+                    <a href="/home" class="logo text-center">
+                        <span class="logo-lg">
+                            <img src="/images/logo.png" alt="" height="50"  style="background-color: #fff; border-radius: 5px;">
+                         </span>
+                        <span class="logo-sm">
+                             <img src="/images/logo.png" alt="" height="24" style="background-color: #fff; border-radius: 5px;">
+                        </span>
+                    </a>
                 </div>
+
+                <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+                    <!-- <li>
+                        <button class="button-menu-mobile waves-effect waves-light">
+                             <i class="fe fe-menu"></i>
+                         </button>
+                    </li> -->
+        
+                    <li class="dropdown d-none d-lg-block">
+                        <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                           <span class="text-white" style="font-size: 30px">{{ config('app.name') }}</span>
+                         </a>                        
+                    </li>
+                   
+                </ul>
             </div>
-        </nav>
+        
+            <div class="left-side-menu">
 
-        <main class="py-4">
-            @yield('content') 
-        </main>
+                <div class="slimscroll-menu">
 
-        <footer class="footer" style="background-color: #007bff !important;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
-                        <span class="text-white">Powered by Mpabaisi Technologies</span>
-                    </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
-                        <div class="text-md-right footer-links d-sm-block">
-                            <?php 
-                            $checkkey = App\User::apearance();                                    
-                            $status = $checkkey['status'];
+                    <div id="sidebar-menu">
+                        @guest
 
-                            $key = App\User::key();
-                            ?> 
-                            @if($status=="invalids")
-                                <a href="https://licence.agent.co.ug/licence/{{$key}}"><span class="text-white">License is active until {{ $checkkey['date'] }}</span> </a>                                                                        
-                            @endif
+                        @else
+                        <ul class="metismenu" id="side-menu">
+                            <li>
+                                <a href="{{ url('home') }}"><span> HOME </span> </a>  
+                                <a class="nav-link" style="text-transform: uppercase;" href="{{route('income.index')}}">Incomes</a>
+                                <a class="nav-link" style="text-transform: uppercase;" href="{{route('expense.index')}}">Expenses</a>
+                                <a class="nav-link" style="text-transform: uppercase;" href="{{route('services.index')}}">Services</a>  
+                                <a class="nav-link" style="text-transform: uppercase;" href="{{route('sales.index')}}">Sales</a>
+                                <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index')}}">Users</a>
+                            </li>                        
+                        </ul>
+                        @endguest
+                    </div> 
+                                       
+
+                    <div class="clearfix"></div>
+
+                </div>             
+            </div>
+             
+
+            <div class="content-page">
+                <div class="content">                   
+                    <div class="container-fluid"> 
+                        @if ($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>     
+                        @endif
+                        <hr>
+                        @yield('content')                      
+                      
+                    </div> 
+                </div>
+
+                <!-- Footer Start -->
+                <footer class="footer" style="background-color: #1062ea !important;">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                               <span class="text-white">Powered by Mpabaisi Technologies</span>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 col-xs-12 col-lg-6">
+                                <?php 
+                                $checkkey = App\User::apearance();                                    
+                                $status = $checkkey['status'];
+
+                                $key = App\User::key();
+                                ?> 
+                                @if($status=="invalids")
+                                    <a href="https://licence.agent.co.ug/licence/{{$key}}"><span class="text-white" style="float: right;">License is active until {{ $checkkey['date'] }}</span> </a>                                                                        
+                                @endif
+                            </div>
+                           
                         </div>
                     </div>
-                </div>
+                </footer>
+                <!-- end Footer -->
+
             </div>
-        </footer>
-    </div>
 
-      <script type="text/javascript">
-        var el = document.querySelector('input.number');
-        el.addEventListener('keyup', function (event) {
-          if (event.which >= 37 && event.which <= 40) return;
-          this.value = this.value.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        });
+            
 
-        var el = document.querySelector('input.number_next');
-        el.addEventListener('keyup', function (event) {
-          if (event.which >= 37 && event.which <= 40) return;
-          this.value = this.value.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        });
-     </script>
-     @stack('scripts')
+        </div>
+      
 
-  
-</body>
+       
+        
+        <div class="rightbar-overlay"></div>
+         
+        <script src="/purple/assets/js/vendor.min.js"></script>        
+        @stack('scripts')
+        
+    </body>
 </html>

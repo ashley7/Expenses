@@ -43,19 +43,10 @@ class IncomeController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request,["date"=>"required","voucher_number"=>"required","amount"=>"required","incomeaccount_id"=>"required"]);
+
+        Income::saveIncome($request->date,$request->voucher_number,$request->amount,$request->incomeaccount_id,$request->particular,$request->phone_number,$request->person_name,$request->balance);
+        return "Saved";
         
-        $save_expense = new Income($request->all());
-        $to_date = date_create(str_replace("/", "-", $request->date));
-        $save_expense->date=date_timestamp_get($to_date);
-        $save_expense->amount=(double)str_replace(",", "", $request->amount);
-        $save_expense->balance=(double)str_replace(",", "", $request->balance);
-        try {
-             $save_expense->save();
-             echo "Saved";
-        } catch (\Exception $e) {
-             echo $e->getMessage();
-        }
     }
 
     /**
@@ -95,32 +86,32 @@ class IncomeController extends Controller
            $save_expense->date=date_timestamp_get($to_date);
         }
 
-        if (!empty($request->voucher_number)) {
+        if (!empty($request->voucher_number)) 
             $save_expense->voucher_number=$request->voucher_number;
-        }
-        if (!empty($request->phone_number)) {
-           $save_expense->phone_number=$request->phone_number;
-       }
-
-       if (!empty($request->person_name)) {
-           $save_expense->person_name=$request->person_name;
-       }
-
-       if (!empty($request->amount)) {
-          $save_expense->amount = (double)str_replace(",", "", $request->amount);
-       }
         
-        if (!empty($request->balance)) {
+        if (!empty($request->phone_number)) 
+           $save_expense->phone_number=$request->phone_number;
+       
+
+       if (!empty($request->person_name)) 
+           $save_expense->person_name=$request->person_name;
+       
+
+       if (!empty($request->amount)) 
+          $save_expense->amount = (double)str_replace(",", "", $request->amount);
+       
+        
+        if (!empty($request->balance)) 
           $save_expense->balance = (double)str_replace(",", "", $request->balance);
-       }
+       
 
-       if (!empty($request->particular)) {
+       if (!empty($request->particular)) 
            $save_expense->particular = $request->particular;
-       }
+       
 
-       if (!empty($request->expense_account_id)) {
+       if (!empty($request->expense_account_id)) 
            $save_expense->incomeaccount_id=$request->expense_account_id;
-       }
+       
         
         try {
              $save_expense->save();

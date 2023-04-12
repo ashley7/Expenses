@@ -3,28 +3,22 @@
 @section('content')
 <div class="container">
     <h1>{{$title}}</h1>
-    <span class="right">
       <a class="btn btn-primary" href="{{route('reports.create')}}">Generate Report</a> 
-      <a class="btn btn-primary " href="{{route('expense.create')}}">Add Expense</a>
-    </span>
-    <hr>
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-    <hr>
-    <form method="POST" action="/search_record" class="col-md-4">
-      @csrf 
-      <input type="text" style="width: 80%;" placeholder="Search manually" name="search_text">
-      <button style="float: right;" class="badge badge-success p-2" type="submit">Search</button>
-    </form>
+      <a class="btn btn-primary" href="{{route('expense.create')}}">Add Expense</a>
+      <a class="btn btn-primary" href="{{route('account.index')}}">Expense Accounts</a>
+
+      <hr>
+    <div class="card">
+      <div class="card-body"> 
+  
+        <form method="POST" action="/search_record" class="col-md-8">
+          @csrf 
+          <input type="text" style="width: 70%;" placeholder="Search manually" name="search_text">
+          <button class="badge badge-success p-1" type="submit">Search</button>
+        </form>
     <hr>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card"> 
-              <div class="card-body">
+ 
                 <?php $total=0; ?>
                     <table class="table table-hover table-striped" id="example">
                       <thead>
@@ -130,8 +124,7 @@
 
               <?php  $total=0 ?>
 
-                <div class="card-body">
-                   <h1></h1>
+                <div class="card-body">                   
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
                           <th>#</th>  <th>Name</th> <th>Description</th> <th>Total amounts</th> <th>Action</th>
@@ -158,15 +151,10 @@
                         </tbody>                      
                     </table>
                   </div>
-
               @endif
-
-
-
             </div>
         </div>
-    </div>
-</div>
+
 @endsection
 
 @include("layouts.data_tables")

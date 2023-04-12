@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
+	if(Auth::guest())
     return view('auth.login');
+
+	return redirect('home');
 });
 Auth::routes();
 
@@ -64,5 +67,19 @@ Route::group(['middleware' => ['auth','license']], function () {
 	Route::post('search_income_record','IncomeController@search_income_record');
 
 	Route::get('search_income_record','IncomeController@index');
+
+	Route::resource('services','ServiceController');
+
+	Route::resource('sales','SaleController');
+
+	Route::post('sales_report','SaleController@sales_report');
+
+	Route::get('sales_report','SaleController@index');
+
+	Route::resource('sale_details','SaleDetailController');
+
+	Route::resource('buyer','BuyerController');
+
+	Route::resource('sale_payments','SalePaymentController');
 
 });
