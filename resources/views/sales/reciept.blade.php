@@ -22,7 +22,7 @@
     @if(!empty($sale->buyer_id))  
         <span>TO: </span><br>               
         <span>{{$sale->buyer->name}}</span><br>
-        <span>{{$sale->buyer->phone_number}} </span><br>
+        <span>Tel:{{$sale->buyer->phone_number}} </span><br>
         <span>{{$sale->buyer->address}}</span><br>
     @endif
     <strong>
