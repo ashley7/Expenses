@@ -64,7 +64,7 @@
                         <tr>
                             <td>{{$detail->service->name}}</td>
                             <td>{{$detail->quantity}}</td>
-                            <td>{{number_format($detail->amount)}}</td>
+                            <td>{{number_format($detail->service->price*$detail->quantity)}}</td>
                             <td>{{number_format($detail->discount)}}</td>
                             <td>{{number_format($detail->amount)}}</td>
                             <td>
