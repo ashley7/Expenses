@@ -45,13 +45,7 @@ class SalePaymentController extends Controller
 
         $savePayment = new SalePayment();
 
-        $savePayment->amount = $request->amount;
-
-        $savePayment->sale_id = $request->sale_id;
-
-        $savePayment->user_id = Auth::id();
-
-        $savePayment->save();
+        $savePayment = SalePayment::savePayment($request->amount,$request->sale_id);
 
         return redirect()->route('sales.show',$savePayment->sale_id);
 

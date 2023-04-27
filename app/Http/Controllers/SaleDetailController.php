@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Income;
 use App\Sale;
 use App\SaleDetail;
+use App\SalePayment;
 use App\Service;
 use Illuminate\Http\Request;
 
@@ -47,21 +48,29 @@ class SaleDetailController extends Controller
 
         $service = Service::find($request->service_id);
 
+        $total_paid=str_replace(",","",$request->total_paid);
+
+        $discount = ($service->price*$request->quantity)-(double)$total_paid;
+
         $saveSaleDetail = new SaleDetail();
 
         $saveSaleDetail->sale_id = $request->sale_id;
 
         $saveSaleDetail->quantity = $request->quantity;
 
-        $saveSaleDetail->discount = $request->discount;
+        $saveSaleDetail->discount = $discount;
 
         $saveSaleDetail->service_id = $service->id;
 
-        $saveSaleDetail->amount = $service->price;
+        $saveSaleDetail->amount = (double)$total_paid;
 
         $saveSaleDetail->save();
 
-        $amount = $saveSaleDetail->amount*$saveSaleDetail->quantity-$saveSaleDetail->discount;
+        if($request->paid == "paid")
+
+            SalePayment::savePayment($saveSaleDetail->amount,$saveSaleDetail->sale_id);
+
+        $amount = $saveSaleDetail->amount;
 
         $income = Income::saveIncome(now(),$saveSaleDetail->id,$amount,$service->incomeaccount_id,$service->name,$saveSaleDetail->sale->buyer->phone_number,$saveSaleDetail->sale->buyer->name);
 
@@ -119,7 +128,7 @@ class SaleDetailController extends Controller
 
         $saveSaleDetail->save();
 
-        $amount = $saveSaleDetail->amount*$saveSaleDetail->quantity-$saveSaleDetail->discount;
+        $amount = $saveSaleDetail->amount-$saveSaleDetail->discount;
         
         $income = Income::where('sale_detail_id',$saveSaleDetail->id)->get();
 
@@ -151,5 +160,13 @@ class SaleDetailController extends Controller
 
         return  redirect()->route('sales.show',$saleDetail->sale_id);       
 
+    }
+
+
+    public function get_price(Request $var)
+    {
+        $service = Service::find($var->service_id);
+
+        return $service->price*$var->quantity;
     }
 }

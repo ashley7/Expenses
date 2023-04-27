@@ -82,4 +82,6 @@ Route::group(['middleware' => ['auth','license']], function () {
 
 	Route::resource('sale_payments','SalePaymentController');
 
+	Route::post('get_price','SaleDetailController@get_price');
+
 });

@@ -84,7 +84,7 @@
                             <td>{{$detail->quantity}}</td>
                             <td>{{number_format($detail->amount)}}</td>
                             <td>{{number_format($detail->discount)}}</td>
-                            <td>{{number_format($detail->quantity*$detail->amount-$detail->discount)}}</td>
+                            <td>{{number_format($detail->amount)}}</td>
                           
                         </tr>
 
@@ -116,11 +116,7 @@
                        
                         <tr>
                             <td>Total cost</td> <td>{{number_format($sale->cost($sale->id))}}</td>
-                        </tr>  
-                        
-                        <tr>
-                            <td>Discount</td> <td>{{number_format($sale->discounts($sale->id))}}</td>
-                        </tr>  
+                        </tr>                       
 
                         <tr>
                             <td>Paid</td> <td>{{number_format($sale->paid($sale->id))}}</td>

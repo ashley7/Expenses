@@ -32,7 +32,7 @@ class Sale extends Model
     public static function cost($sale_id)
     {
 
-        return SaleDetail::where('sale_id',$sale_id)->sum(DB::raw('quantity * amount'));
+        return SaleDetail::where('sale_id',$sale_id)->sum('amount');
 
     }
 
@@ -54,6 +54,8 @@ class Sale extends Model
     {
         $balance = Sale::cost($sale_id)-Sale::paid($sale_id);
 
-        return $balance - Sale::discounts($sale_id);
+        return $balance;
+
+        // return $balance - Sale::discounts($sale_id);
     }
 }

@@ -66,12 +66,12 @@
                             <td>{{$detail->quantity}}</td>
                             <td>{{number_format($detail->amount)}}</td>
                             <td>{{number_format($detail->discount)}}</td>
-                            <td>{{number_format($detail->quantity*$detail->amount-$detail->discount)}}</td>
+                            <td>{{number_format($detail->amount)}}</td>
                             <td>
                                 <form action="{{route('sale_details.destroy',$detail->id)}}" method="POST" onsubmit="return confirm('Do you want to delete this Item?'); return false;">
                                     @csrf 
                                     {{method_field('DELETE')}}
-                                    <span data-toggle="modal" class="badge badge-primary p-1" data-target="#edit_item{{$detail->id}}">Update</span>
+                                    <!-- <span data-toggle="modal" class="badge badge-primary p-1" data-target="#edit_item{{$detail->id}}">Update</span> -->
                                     <button type="submit" class="badge badge-danger">Delete</button>
 
                                 </form>
@@ -102,8 +102,8 @@
                                         <label for="quantity">Quantity</label>
                                         <input type="number" step="any" value="{{$detail->quantity}}" class="form-control" name="quantity">
 
-                                        <label for="discount">Discount </label>
-                                        <input type="number" class="form-control" value="{{$detail->discount}}" name="discount">
+                                        <label for="discount">Total paid </label>
+                                        <input type="number" class="form-control" value="" name="total_paid">
 
 
                                         <hr>
@@ -141,11 +141,7 @@
                        
                         <tr>
                             <td>Total cost</td> <td>{{number_format($sale->cost($sale->id))}}</td>
-                        </tr>  
-                        
-                        <tr>
-                            <td>Discount</td> <td>{{number_format($sale->discounts($sale->id))}}</td>
-                        </tr>  
+                        </tr>                      
 
                         <tr>
                             <td>Paid</td> <td>{{number_format($sale->paid($sale->id))}}</td>
@@ -177,18 +173,24 @@
         <form action="{{route('sale_details.store')}}" method="POST">
             @csrf
 
-            <label for="service_id">Service ID</label>
+            <label for="service_id">Select Service</label>
             <select name="service_id" id="service_id" class="form-control">
+                <option value=""></option>
                 @foreach($services as $service)
                     <option value="{{$service->id}}">{{$service->name}} ({{number_format($service->price)}})</option>
                 @endforeach
             </select>
 
             <label for="quantity">Quantity</label>
-            <input type="number" step="any" class="form-control" name="quantity">
+            <input type="number" step="any" class="form-control" name="quantity" id="quantity">
 
-            <label for="discount">Discount </label>
-            <input type="number" class="form-control" name="discount">
+            <hr>
+
+            <input type="radio" checked name="paid" value="paid"> Paid <br>
+            <input type="radio" name="paid" value="notpaid">Not Paid<br>
+
+            <label for="discount">Total paid </label>
+            <input type="text" class="form-control total_paid" name="total_paid" id="total_paid">
 
             <input type="hidden" name="sale_id" value="{{$sale->id}}">
 
@@ -230,3 +232,41 @@
   </div>
 </div>
 @endsection
+
+@push("scripts")
+<script>
+
+    var $input = $('#quantity');
+    $input.on('keyup', function () {
+
+        $.ajax({
+
+            type: "POST",
+
+            url: "{{url('/get_price')}}",
+
+            data: {
+
+                quantity: $("#quantity").val(),
+                service_id:$("#service_id").val(),
+
+            _token: "{{Session::token()}}"
+
+            },
+            success: function(result){               
+
+                $('#total_paid').val(result);
+
+            }
+
+            });    
+    });
+
+    var elc = document.querySelector('input.total_paid');
+    elc.addEventListener('keyup', function (event) {
+      if (event.which >= 37 && event.which <= 40) return;
+      this.value = this.value.replace(/\D/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    });
+
+</script>
+@endpush
