@@ -4,7 +4,7 @@
 <div class="container">   
     
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_item">
-    Add service
+    Add Item to sale
     </button>
 
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_payment">
@@ -201,7 +201,7 @@
             <input type="radio" checked name="paid" value="paid"> Paid <br>
             <input type="radio" name="paid" value="notpaid">Not Paid<br>
 
-            <label for="discount">Total paid </label>
+            <label for="discount">Total amount billed </label>
             <input type="text" class="form-control total_paid" name="total_paid" id="total_paid">
 
             <input type="hidden" name="sale_id" value="{{$sale->id}}">
