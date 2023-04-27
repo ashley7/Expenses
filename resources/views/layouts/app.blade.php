@@ -110,6 +110,7 @@
                                 <a class="nav-link" style="text-transform: uppercase;" href="{{route('expense.index')}}">Expenses</a>
                                 <a class="nav-link" style="text-transform: uppercase;" href="{{route('services.index')}}">Services</a>  
                                 <a class="nav-link" style="text-transform: uppercase;" href="{{route('sales.index')}}">Sales</a>
+                                <a class="nav-link" style="text-transform: uppercase;" href="{{route('buyer.index')}}">Customers</a>
                                 <a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index')}}">Users</a>
                             </li>                        
                         </ul>

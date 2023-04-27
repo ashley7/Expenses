@@ -62,6 +62,8 @@
         </tr>                      
     </table>
 
+    <span>Prices are inclussive of VAT</span>
+
     <span>Notes</span> <br>
     @foreach($sale->comments as $comment)
         <span>{{$comment->comment}}</span>                          

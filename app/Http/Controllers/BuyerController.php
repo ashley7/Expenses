@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Buyer;
+use App\Sale;
 use Illuminate\Http\Request;
 
 class BuyerController extends Controller
@@ -14,7 +15,14 @@ class BuyerController extends Controller
      */
     public function index()
     {
-        //
+        $customers = Buyer::get();
+
+        $data = [
+            'customers'=>$customers,
+            'title'=>'Customers'
+        ];
+
+        return view('sales.buyers')->with($data);
     }
 
     /**
@@ -64,9 +72,19 @@ class BuyerController extends Controller
      * @param  \App\Buyer  $buyer
      * @return \Illuminate\Http\Response
      */
-    public function show(Buyer $buyer)
+    public function show($buyer_id)
     {
-        //
+        $sales = Sale::where('buyer_id',$buyer_id)->paginate(100);
+
+        $buyers = Buyer::get();
+
+        $data = [
+            'sales'=>$sales,
+            'title'=>'Sales',
+            'buyers'=>$buyers,
+        ];
+
+        return view('sales.sales')->with($data);
     }
 
     /**
