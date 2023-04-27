@@ -58,4 +58,9 @@ class Sale extends Model
 
         // return $balance - Sale::discounts($sale_id);
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

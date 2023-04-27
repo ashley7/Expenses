@@ -84,4 +84,6 @@ Route::group(['middleware' => ['auth','license']], function () {
 
 	Route::post('get_price','SaleDetailController@get_price');
 
+	Route::resource('comments','CommentController');
+
 });

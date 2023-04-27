@@ -11,6 +11,10 @@
     Add Payment
     </button>
 
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_comment">
+        Add comment
+    </button>
+
     <a class="btn btn-success" href="{{route('sale_payments.show',$sale->id)}}">Print sales reciept</a>
     <hr>
 
@@ -156,6 +160,14 @@
                 </div>
             </div>
 
+            <hr>
+
+            <p>Notes</p>
+
+            @foreach($sale->comments as $comment)
+              <p>{{$comment->comment}}</p>                          
+            @endforeach
+
         </div>
     </div>
 </div> 
@@ -220,6 +232,34 @@
 
             <label for="amount">Amount</label>
             <input type="number" step="any" class="form-control" name="amount" value="{{$sale->balance($sale->id)}}">             
+
+            <input type="hidden" name="sale_id" value="{{$sale->id}}">
+
+            <hr>
+            <button class="btn btn-primary" type="submit">Save</button>
+        </form>
+            
+        </div>    
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="add_comment">
+  <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Add comment</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <div class="modal-body">
+
+        <form action="{{route('comments.store')}}" method="POST">
+            @csrf             
+
+            <label for="amount">Comment</label>
+            <textarea name="comment" id="comment" class="form-control" cols="30" rows="10"></textarea>
 
             <input type="hidden" name="sale_id" value="{{$sale->id}}">
 

@@ -131,6 +131,11 @@
                 </div>
             </div>
 
+            <p>Notes</p>
+            @foreach($sale->comments as $comment)
+              <p>{{$comment->comment}}</p>                          
+            @endforeach
+
             <hr>
             <p>Processed by:  {{$sale->user->name}}</p>
             <p>Document printing time: {{now()}}</p>
