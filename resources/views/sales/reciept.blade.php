@@ -62,7 +62,7 @@
         </tr>                      
     </table>
 
-    <span>Prices are inclussive of VAT</span>
+    <span>Prices are inclussive of VAT</span><br>
 
     <span>Notes</span> <br>
     @foreach($sale->comments as $comment)
