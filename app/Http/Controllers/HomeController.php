@@ -27,7 +27,7 @@ class HomeController extends Controller
 
       $amountSold = Sale::whereDate('sales.created_at',today())->join('sale_details','sales.id','sale_details.sale_id')->sum(DB::raw('quantity * amount - discount'));
 
-      $allTimesSales = Sale::join('sale_details','sales.id','sale_details.sale_id')->sum(DB::raw('quantity * amount - discount'));
+      $allTimesSales = Sale::join('sale_details','sales.id','sale_details.sale_id')->sum(DB::raw('amount'));
 
       $payments = SalePayment::sum('amount');
 
