@@ -10,8 +10,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
          <style>
             th,td {
-                background-color: #f7f7f7;
-                border-style: solid;
+                background-color: #ffffff;
+                border-style: none;
                 border-width: 1px;
                 text-align: center;
             }

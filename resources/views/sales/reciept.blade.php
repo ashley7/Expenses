@@ -1,6 +1,8 @@
 @extends('layouts.invoice_master')
 
-@section('content')   
+@section('content')  
+
+<strong>
     <a href="{{route('sales.index')}}" id="hide_form"  class="btn btn-success">Back</a> 
     <center>
         <img src="{{asset('images/logo.png')}}" width="100px">
@@ -13,9 +15,9 @@
         <span>Gayaza Road,Kyebando</span><br>
         <span>P.O.Box 26811,Kampala (U)</span><br>
         <span>+256784918758/+256756711418</span>  <br>
-    </center>               
+    </center>  
+    <br>            
             
-    <hr style="height:3px; border:none;color:green;background-color:blue;">
     <center>
         <span style="font-size: 12px;"><strong><u>RECIEPT</u></strong></span>
     </center>      
@@ -25,10 +27,10 @@
         <span>Tel:{{$sale->buyer->phone_number}} </span><br>
         <span>{{$sale->buyer->address}}</span><br>
     @endif
-    <strong>
-        <span class="text-danger">No. {{$sale->id}}</span><br>
-        <span>{{Carbon\Carbon::parse($sale->created_at )->format("d M Y")}}</span>
-    </strong>
+  
+    <span class="text-danger">No. {{$sale->id}}</span><br>
+    <span>{{Carbon\Carbon::parse($sale->created_at )->format("d M Y")}}</span>
+    <hr>
         
     <table class="table">
         <thead>
@@ -41,27 +43,18 @@
                 <tr>
                     <td>{{$detail->service->name}}</td>
                     <td>{{$detail->quantity}}</td>
-                    <td>{{number_format($detail->amount)}}</td>
-                    
+                    <td>{{number_format($detail->amount)}}</td>                    
                 </tr>                       
             @endforeach
         </tbody>
-    </table>        
-        
-    <table class="table">                       
-        <tr>
-            <td>Total cost</td> <td>{{number_format($sale->cost($sale->id))}}</td>
-        </tr>                       
+    </table> 
 
-        <tr>
-            <td>Paid</td> <td>{{number_format($sale->paid($sale->id))}}</td>
-        </tr> 
-
-        <tr>
-            <td>Balance</td> <td>UGX {{number_format($sale->balance($sale->id))}}</td>
-        </tr>                      
-    </table>
-
+    <br>
+    
+    <span>Total cost: UGX {{number_format($sale->cost($sale->id))}}</span><br>
+    <span>Paid amount: UGX {{number_format($sale->paid($sale->id))}}</span><br>
+    <span>Balance: UGX {{number_format($sale->balance($sale->id))}}</span>
+    <br>
     <span>Prices are inclussive of VAT</span><br>
 
     <span>Notes</span> <br>
@@ -72,10 +65,4 @@
     <span>Processed by:  {{$sale->user->name}}</span><br>
     <span>Date: {{now()->format('d M, Y: h i s')}}</span><br>
     <span>Thank you.</span> 
-<script>    
-    var x = document.getElementById("hide_form");
-    x.style.display = "none";  
-    window.print()
-    x.style.display = "block";         
-</script>
- 
+</strong>
