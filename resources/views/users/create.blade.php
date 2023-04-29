@@ -23,6 +23,13 @@
 
                         <label>Phone Number</label>
                         <input type="text" name="phone_number" class="form-control">
+
+                        <label for="user_type">User type</label>
+                        <select name="user_type" id="user_type" class="form-control">
+                            @foreach($user_types as $user_type)
+                            <option value="{{$user_type}}">{{$user_type}}</option>
+                            @endforeach
+                        </select>
                         <br>
                         <button class="btn btn-primary" type="submit">Save</button>
                     </form>                  

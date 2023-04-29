@@ -75,9 +75,10 @@
                                 <form action="{{route('sale_details.destroy',$detail->id)}}" method="POST" onsubmit="return confirm('Do you want to delete this Item?'); return false;">
                                     @csrf 
                                     {{method_field('DELETE')}}
+                                    @if(Auth::user()->user_type == "administrator")
                                     <!-- <span data-toggle="modal" class="badge badge-primary p-1" data-target="#edit_item{{$detail->id}}">Update</span> -->
-                                    <button type="submit" class="badge badge-danger">Delete</button>
-
+                                        <button type="submit" class="badge badge-danger">Delete</button>
+                                    @endif
                                 </form>
                             </td>
                         </tr>

@@ -17,7 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $data = [
-            "user"=>User::all(),
+            "user"=>User::get(),
             "title"=>"List of users"
         ];
         return view("users.list")->with($data);
@@ -30,7 +30,9 @@ class UserController extends Controller
      */
     public function create()
     {
-       return view("users.create");
+        $user_types = ['administrator','reception'];
+
+        return view("users.create")->with(['user_types'=>$user_types]);
     }
 
     /**
@@ -41,16 +43,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        $rules = [
+            'name'=>'required',
+            'user_type'=>'required',
+            'phone_number'=>'required'
+        ];
+
+        $this->validate($request,$rules);
+
         $save_user = new User();
-        $save_user->name=$request->name;
-        if (empty($request->phone_number)) {
-             $save_user->phone_number=time();
-        }else{
-           $save_user->phone_number=$request->phone_number; 
-        }
+
+        $save_user->name = $request->name;
+
+        $save_user->user_type = $request->user_type;
+
+        $save_user->phone_number=$request->phone_number;        
         
-        $save_user->password=bcrypt(12345);
+        $save_user->password = bcrypt("user123@");
+
         $save_user->save();
+
         return back()->with(['status'=>'User created']);
 
     }
