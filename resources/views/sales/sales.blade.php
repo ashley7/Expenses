@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container">   
+
+<h4>{{$title}}</h4>
     
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_sale">
   Add new sale
@@ -38,6 +40,13 @@
                 <select name="buyer_id" id="buyer_id" class="form-control" required>
                     @foreach($buyers as $buyer)
                         <option value="{{$buyer->id}}">{{$buyer->name}}</option>
+                    @endforeach
+                </select>
+
+                <label for="payment_type">Payment type</label>
+                <select name="payment_type" id="payment_type" class="form-control">
+                    @foreach($payment_types as $payment_type)
+                     <option value="{{$payment_type}}">{{$payment_type}}</option>
                     @endforeach
                 </select>
 

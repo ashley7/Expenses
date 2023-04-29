@@ -35,12 +35,4 @@
 
 @endsection
 
-@include("layouts.data_tables")
-
-@push('scripts')
-<script>
-    $("#income_account_id").chosen({
-        width:"100%"
-    });
-</script>
-@endpush
+ 

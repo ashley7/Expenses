@@ -55,11 +55,13 @@
                               <?php $total=$total+$account->amount; ?>
                               <td>
 
-                                 <form action="/expense/{{ $account->id }}" method="POST">
+                                 <form action="/expense/{{ $account->id }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this record?'); return false;">
                                     {{method_field('DELETE')}}
                                     {{ csrf_field() }}
-                                    <a href="{{route('expense.edit',$account->id)}}" class="btn btn-info">Edit</a>
-                                    <!-- <input type="submit" class="btn btn-danger" value="Delete"/> -->
+                                    @if(Auth::user()->user_type == "administrator")
+                                    <a href="{{route('expense.edit',$account->id)}}" class="badge badge-info">Edit</a>
+                                    <button class="badge badge-danger">Delete</button>
+                                     @endif
                                 </form>
                               </td>
                           </tr>

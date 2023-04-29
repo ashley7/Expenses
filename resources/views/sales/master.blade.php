@@ -5,6 +5,7 @@ $total_cost = $total_paid = $total_discount = $total_balance = 0;
     <thead>
         <th>Date</th>
         <th>Customer</th>
+        <th>Payment type</th>
         <th>Amount billed</th>
         <th>Amount paid</th>
         <th>Discount</th>
@@ -35,6 +36,7 @@ $total_cost = $total_paid = $total_discount = $total_balance = 0;
             <tr>
                 <td>{{$sale->created_at}}</td>
                 <td>{{$sale->buyer->name}} <br> {{$sale->buyer->phone_number}}</td>
+                <td>{{$sale->payment_type}}</td>
                 <td>{{number_format($cost)}}</td>
                 <td>{{number_format($paid)}}</td>
                 <td>{{number_format($discount)}}</td>
@@ -50,7 +52,9 @@ $total_cost = $total_paid = $total_discount = $total_balance = 0;
     <thead>
         <th>Total</th>
         <th></th>
+        <td></td>
         <th>{{number_format($total_cost)}}</th>
+       
         <th>{{number_format($total_paid)}}</th>
         <th>{{number_format($total_discount)}}</th>
         <th>{{number_format($total_balance)}}</th>

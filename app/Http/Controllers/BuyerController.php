@@ -76,11 +76,13 @@ class BuyerController extends Controller
     {
         $sales = Sale::where('buyer_id',$buyer_id)->paginate(100);
 
+        $customer = Buyer::find($buyer_id);
+
         $buyers = Buyer::get();
 
         $data = [
             'sales'=>$sales,
-            'title'=>'Sales',
+            'title'=>'Sales by '.$customer->name,
             'buyers'=>$buyers,
         ];
 

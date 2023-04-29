@@ -8,7 +8,7 @@
     <div class="card">
         <div class="card-body"> 
 
-        <table class="table">
+        <table class="table" id="example">
             <thead>
                 <th>Name</th>
                 <th>Phone Number</th>

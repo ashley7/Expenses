@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Buyer;
 use App\Sale;
 use App\Service;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
@@ -21,10 +24,13 @@ class SaleController extends Controller
 
         $buyers = Buyer::get();
 
+        $payment_types = ['cash','mobile_money','card','bank'];
+
         $data = [
             'sales'=>$sales,
             'title'=>'Sales',
             'buyers'=>$buyers,
+            'payment_types'=>$payment_types,
         ];
 
         return view('sales.sales')->with($data);
@@ -38,10 +44,11 @@ class SaleController extends Controller
      */
     public function create()
     {
-        $buyers = Buyer::get();
+        $users = User::get();
 
         $data = [
-            'title'=>'Sales report'
+            'title'=>'Sales report',
+            'users'=>$users,
         ];
 
         return view('sales.sale_report')->with($data);
@@ -69,6 +76,8 @@ class SaleController extends Controller
         $saveSale->sale_date = $request->sale_date;
 
         $saveSale->user_id = Auth::id();
+
+        $saveSale->payment_type = $request->payment_type;
 
         $saveSale->save();
 
@@ -137,18 +146,26 @@ class SaleController extends Controller
         $rules = [
             'from'=>'required',
             'to'=>'required',
+            'users'=>'required',
         ];
 
         $this->validate($request,$rules);
 
-        $sales = Sale::whereBetween('created_at',[$request->from,$request->to])->get();
+        $from = Carbon::createFromFormat("Y-m-d",$request->from)->subDay();
+
+        $to = Carbon::createFromFormat("Y-m-d",$request->to)->addDay();
+
+        $sales = Sale::whereBetween(DB::raw('DATE(created_at)'),[$from,$to])->whereIn('user_id',$request->users)->get();
 
         $buyers = Buyer::get();
+
+        $payment_types = ['cash','mobile_money','card','bank'];
 
         $data = [
             'sales'=>$sales,
             'title'=>'Sales',
             'buyers'=>$buyers,
+            'payment_types'=>$payment_types,
         ];
 
         return view('sales.sales')->with($data);
