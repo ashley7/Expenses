@@ -125,7 +125,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        try {
+            User::destroy($id);
+        } catch (\Throwable $th) {}       
+
+        return back();
     }
 
     public function activateLicence(Request $activate)

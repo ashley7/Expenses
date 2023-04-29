@@ -31,7 +31,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                            <th>#</th> <th>Name</th> <th>Phone</th>
+                            <th>#</th> <th>Name</th> <th>Phone</th> <th>
                         </thead>
 
                         <tbody>
@@ -41,6 +41,13 @@
                               <td>{{$users->id}}</td>
                               <td>{{$users->name}}</td>
                               <td>{{$users->phone_number}}</td>
+                              <td>
+                                <form method="POST" action="{{route('user.destroy',$users->id)}}" onsubmit="return confirm('Are you sure you want to delete this user?'); return false;">
+                                  @csrf 
+                                  {{method_field('DELETE')}}
+                                  <button type="submit" class="badge badge-danger">Delete</button>
+                                </form>
+                              </td>
                               
                              </tr>
                           @endforeach
