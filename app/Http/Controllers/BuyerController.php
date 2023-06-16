@@ -80,10 +80,13 @@ class BuyerController extends Controller
 
         $buyers = Buyer::get();
 
+        $payment_types = ['cash','mobile_money','card','bank'];
+
         $data = [
             'sales'=>$sales,
             'title'=>'Sales by '.$customer->name,
             'buyers'=>$buyers,
+            'payment_types'=>$payment_types,
         ];
 
         return view('sales.sales')->with($data);
